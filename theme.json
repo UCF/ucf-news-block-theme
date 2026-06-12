@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/wp/7.0/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "700px",
+      "wideSize": "1200px"
+    }
+  },
+  "styles": {
+    "spacing": {
+      "blockGap": "1.5rem"
+    }
+  }
+}
