@@ -6,7 +6,7 @@ A WordPress block theme for UCF Today (https://www.ucf.edu/news).
 - Requires at least: WordPress 7.0
 - Tested up to: 7.0
 - Requires PHP: 8.1
-- License: MIT
+- License: GPL-3.0-or-later
 
 ## Purpose
 
@@ -106,4 +106,4 @@ Near-term work for this project:
 
 ## License
 
-This project is released under the MIT License. See `LICENSE`.
+This project is released under the GNU General Public License v3.0 or later. See `LICENSE`.
