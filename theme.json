@@ -3,9 +3,58 @@
   "version": 3,
   "settings": {
     "appearanceTools": true,
+    "color": {
+      "palette": [
+        {
+					"color": "#fc0",
+					"name": "UCF Gold (Primary)",
+					"slug": "primary"
+				},
+				{
+					"color": "#000",
+					"name": "Black (Secondary)",
+					"slug": "secondary"
+				},
+        {
+          "color": "#0275d8",
+          "name": "Blue (Complementary)",
+          "slug": "complementary"
+        },
+				{
+					"color": "#fff",
+					"name": "White (Inverse)",
+					"slug": "inverse"
+				},
+        {
+					"color": "#2ecc71",
+					"name": "Success",
+					"slug": "success"
+				},
+				{
+					"color": "#81cfe0",
+					"name": "Info",
+					"slug": "info"
+				},
+				{
+					"color": "#f4b350",
+					"name": "Warning",
+					"slug": "warning"
+				},
+				{
+					"color": "#ff6445",
+					"name": "Danger",
+					"slug": "danger"
+				},
+        {
+          "color": "#6c757d",
+          "name": "Muted",
+          "slug": "muted"
+        }
+      ]
+    },
     "layout": {
-      "contentSize": "700px",
-      "wideSize": "1200px"
+      "contentSize": "760px",
+      "wideSize": "950px"
     }
   },
   "styles": {
