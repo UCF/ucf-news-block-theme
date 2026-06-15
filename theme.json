@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schemas.wp.org/wp/7.0/theme.json",
-  "version": 3,
-  "settings": {
-    "appearanceTools": true,
-    "color": {
-      "palette": [
-        {
+	"$schema": "https://schemas.wp.org/wp/7.0/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"palette": [
+				{
 					"color": "#fc0",
 					"name": "UCF Gold (Primary)",
 					"slug": "primary"
@@ -15,17 +15,17 @@
 					"name": "Black (Secondary)",
 					"slug": "secondary"
 				},
-        {
-          "color": "#0275d8",
-          "name": "Blue (Complementary)",
-          "slug": "complementary"
-        },
+				{
+					"color": "#0275d8",
+					"name": "Blue (Complementary)",
+					"slug": "complementary"
+				},
 				{
 					"color": "#fff",
 					"name": "White (Inverse)",
 					"slug": "inverse"
 				},
-        {
+				{
 					"color": "#2ecc71",
 					"name": "Success",
 					"slug": "success"
@@ -45,172 +45,172 @@
 					"name": "Danger",
 					"slug": "danger"
 				},
-        {
-          "color": "#6c757d",
-          "name": "Muted",
-          "slug": "muted"
-        }
-      ]
-    },
-    "layout": {
-      "contentSize": "760px",
-      "wideSize": "950px"
-    },
-    "typography": {
-      "fontFamilies": [
-        {
-          "fontFamily": "'UCF Sans Serif Alt', 'Helvetica Neue', Arial, sans-serif",
-          "name": "UCF Sans Serif Alt",
-          "slug": "ucf-sans-serif-alt",
-          "fontFace": [
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "100",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "200",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "300",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "400",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "500",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "600",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "700",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "800",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Sans Serif Alt",
-              "fontWeight": "900",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff2",
-                "file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff"
-              ]
-            }
-          ]
-        },
-        {
-          "fontFamily": "'UCF Slab Serif Alt', serif",
-          "name": "UCF Slab Serif Alt",
-          "slug": "ucf-slab-serif-alt",
-          "fontFace": [
-            {
-              "fontFamily": "UCF Slab Serif Alt",
-              "fontWeight": "400",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/tulia/tulia_regular-webfont.woff2",
-                "file:./assets/fonts/tulia/tulia_regular-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Slab Serif Alt",
-              "fontWeight": "400",
-              "fontStyle": "italic",
-              "src": [
-                "file:./assets/fonts/tulia/tulia_italic-webfont.woff2",
-                "file:./assets/fonts/tulia/tulia_italic-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Slab Serif Alt",
-              "fontWeight": "700",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/tulia/tulia_bold-webfont.woff2",
-                "file:./assets/fonts/tulia/tulia_bold-webfont.woff"
-              ]
-            }
-          ]
-        },
-        {
-          "fontFamily": "'UCF Condensed Alt', sans-serif",
-          "name": "UCF Condensed Alt",
-          "slug": "ucf-condensed-alt",
-          "fontFace": [
-            {
-              "fontFamily": "UCF Condensed Alt",
-              "fontWeight": "400",
-              "fontStyle": "normal",
-              "src": [
-                "file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff2",
-                "file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff"
-              ]
-            },
-            {
-              "fontFamily": "UCF Condensed Alt",
-              "fontWeight": "400",
-              "fontStyle": "italic",
-              "src": [
-                "file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff2",
-                "file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff"
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  },
-  "styles": {
-    "spacing": {
-      "blockGap": "1.5rem"
-    }
-  }
+				{
+					"color": "#6c757d",
+					"name": "Muted",
+					"slug": "muted"
+				}
+			]
+		},
+		"layout": {
+			"contentSize": "760px",
+			"wideSize": "950px"
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFamily": "'UCF Sans Serif Alt', 'Helvetica Neue', Arial, sans-serif",
+					"name": "UCF Sans Serif Alt",
+					"slug": "ucf-sans-serif-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "100",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "200",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "800",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "900",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'UCF Slab Serif Alt', serif",
+					"name": "UCF Slab Serif Alt",
+					"slug": "ucf-slab-serif-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/tulia/tulia_regular-webfont.woff2",
+								"file:./assets/fonts/tulia/tulia_regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"src": [
+								"file:./assets/fonts/tulia/tulia_italic-webfont.woff2",
+								"file:./assets/fonts/tulia/tulia_italic-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/tulia/tulia_bold-webfont.woff2",
+								"file:./assets/fonts/tulia/tulia_bold-webfont.woff"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'UCF Condensed Alt', sans-serif",
+					"name": "UCF Condensed Alt",
+					"slug": "ucf-condensed-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Condensed Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff2",
+								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Condensed Alt",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"src": [
+								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff2",
+								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff"
+							]
+						}
+					]
+				}
+			]
+		}
+	},
+	"styles": {
+		"spacing": {
+			"blockGap": "1.5rem"
+		}
+	}
 }
