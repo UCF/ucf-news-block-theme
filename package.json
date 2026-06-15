@@ -1,21 +1,21 @@
 {
-  "name": "ucf-news-block-theme",
-  "version": "0.1.0",
-  "description": "Build pipeline for UCF Today Block Theme styles.",
-  "license": "GPL-3.0-or-later",
-  "author": "UCF Web Communications",
-  "private": true,
-  "scripts": {
-    "build": "sass src/scss/style.scss assets/css/main.css --style=compressed --no-source-map",
-    "watch": "sass --watch src/scss/style.scss assets/css/main.css --style=expanded",
-    "env:start": "wp-env start",
-    "env:stop": "wp-env stop",
-    "env:clean": "wp-env clean all",
-    "version:sync": "node scripts/sync-version.mjs",
-    "version": "npm run version:sync"
-  },
-  "devDependencies": {
-    "@wordpress/env": "^10.0.0",
-    "sass": "^1.100.0"
-  }
+	"name": "ucf-news-block-theme",
+	"version": "0.1.0",
+	"description": "Build pipeline for UCF Today Block Theme styles.",
+	"license": "GPL-3.0-or-later",
+	"author": "UCF Web Communications",
+	"private": true,
+	"scripts": {
+		"build": "sass src/scss/style.scss assets/css/main.css --style=compressed --no-source-map",
+		"watch": "sass --watch src/scss/style.scss assets/css/main.css --style=expanded",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:clean": "wp-env clean all",
+		"version:sync": "node scripts/sync-version.mjs",
+		"version": "npm run version:sync"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^10.0.0",
+		"sass": "^1.100.0"
+	}
 }
