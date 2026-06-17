@@ -10,8 +10,8 @@
 	display: inline-flex;
 	align-items: baseline;
 	font-family: var(--wp--preset--font-family--ucf-slab-serif-alt);
-	font-weight: 700;
-	font-size: clamp(1.5rem, 1.15rem + 1.4vw, 2rem);
+	font-weight: 800;
+	font-size: clamp(1.5rem, 1.15rem + .8vw, 1.8rem);
 	line-height: 1;
 	letter-spacing: 0.01em;
 	text-transform: uppercase;
@@ -27,12 +27,14 @@
 	&__rest {
 		// inherits the serif set on .site-wordmark
 		color: var(--wp--preset--color--secondary);
+		// Reduce the font weight
+		font-weight: 400;
 		// Render as "Today" (title case) rather than inheriting the parent's
 		// uppercase transform.
 		text-transform: none;
 		// The slab serif's cap height reads shorter than the sans "UCF" at the
 		// same size; nudge it up so the capital "T" matches. Tune to taste.
-		font-size: 1.15em;
+		font-size: 1.1em;
 	}
 
 	&:focus-visible {

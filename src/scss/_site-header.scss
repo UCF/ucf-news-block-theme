@@ -51,5 +51,8 @@
 
 .site-tagline {
 	margin: 0;
-	letter-spacing: 0.02em;
+	color: var(--wp--preset--color--muted);
+	font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+	font-weight: 500;
+	letter-spacing: 0.05em;
 }
