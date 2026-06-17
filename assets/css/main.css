@@ -1,1 +1,178 @@
+/*
+ * UCF Today Block Theme styles entrypoint.
+ *
+ * Most color, font-family, font-size and spacing values are tokenized in
+ * theme.json and consumed either through WordPress preset classes
+ * (e.g. `.has-primary-color`, `.has-ucf-condensed-alt-font-family`) in block
+ * markup, or through the generated CSS custom properties
+ * (e.g. `var(--wp--preset--color--primary)`) in the partials below.
+ *
+ * Partials are split into reusable utilities and element-specific components.
+ */
+/*
+ * Reusable, single-purpose utility classes.
+ *
+ * These cover presentational concerns that theme.json presets do NOT generate
+ * (font weight, text-transform, letter-spacing). Color, font-family, font-size
+ * and spacing already have preset classes / custom properties from theme.json,
+ * so they are intentionally not duplicated here.
+ */
+.u-uppercase {
+  text-transform: uppercase;
+}
 
+.u-tracking-wide {
+  letter-spacing: 0.04em;
+}
+
+.u-fw-light {
+  font-weight: 300;
+}
+
+.u-fw-regular {
+  font-weight: 400;
+}
+
+.u-fw-semibold {
+  font-weight: 600;
+}
+
+.u-fw-bold {
+  font-weight: 700;
+}
+
+.u-fw-black {
+  font-weight: 900;
+}
+
+/*
+ * Site header layout.
+ *
+ * Structure (see parts/header.html):
+ *   .site-header
+ *     .site-header__bar        -> contained top row
+ *       .site-header__bar-inner  -> flex: brand <-> weather
+ *         .site-header__brand      -> wordmark + tagline
+ *         .site-header__weather    -> reserved slot (empty for now)
+ *     .site-header__nav        -> full-bleed faded strip w/ centered nav
+ */
+.site-header {
+  padding: 0;
+  border-bottom: 1px solid var(--wp--preset--color--secondary);
+}
+.site-header__bar {
+  padding-block: var(--wp--preset--spacing--large);
+  padding-inline: var(--wp--preset--spacing--medium);
+}
+.site-header__bar-inner {
+  gap: var(--wp--preset--spacing--large);
+}
+.site-header__brand {
+  gap: var(--wp--preset--spacing--medium);
+}
+.site-header__weather {
+  gap: var(--wp--preset--spacing--small);
+  min-height: 1px;
+}
+.site-header__nav {
+  margin-block-start: 0;
+  padding-block: var(--wp--preset--spacing--small);
+  padding-inline: var(--wp--preset--spacing--medium);
+  border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
+}
+
+.site-tagline {
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/*
+ * "UCF Today" wordmark.
+ *
+ * Deliberately element-specific: the two-tone treatment (gold "UCF" + black
+ * "Today") is unique to this mark, so it owns its own component class rather
+ * than leaning on shared utilities.
+ */
+.site-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--wp--preset--font-family--ucf-slab-serif-alt);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.15rem + 1.4vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-wordmark__lead {
+  font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+  margin-inline-end: 0.15em;
+  color: var(--wp--preset--color--primary);
+}
+.site-wordmark__rest {
+  color: var(--wp--preset--color--secondary);
+  text-transform: none;
+  font-size: 1.15em;
+}
+.site-wordmark:focus-visible {
+  outline: 2px solid var(--wp--preset--color--primary);
+  outline-offset: 4px;
+}
+
+/*
+ * Primary navigation (core wp:navigation block, .main-nav).
+ *
+ * Link typography is built from reusable tokens (UCF Sans Serif Alt, bold,
+ * uppercase, wide tracking). On tablet and below the block collapses to an
+ * overlay triggered by a button styled to read "SECTIONS" + the hamburger
+ * icon, to match the reference design.
+ */
+.main-nav {
+  padding-block: var(--wp--preset--spacing--small);
+}
+.main-nav .wp-block-navigation-item__content {
+  font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--secondary);
+  text-decoration: none;
+}
+.main-nav .wp-block-navigation-item__content:hover,
+.main-nav .wp-block-navigation-item__content:focus-visible {
+  color: var(--wp--preset--color--primary);
+}
+.main-nav.wp-block-navigation {
+  --wp--style--block-gap: clamp(1rem, 0.4rem + 1.6vw, 2.25rem);
+}
+@media (min-width: 600px) and (max-width: 1023.98px) {
+  .main-nav.wp-block-navigation .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: flex;
+  }
+  .main-nav.wp-block-navigation .wp-block-navigation__responsive-container:not(.is-menu-open) {
+    display: none;
+  }
+}
+.main-nav .wp-block-navigation__responsive-container-open {
+  margin-inline-start: auto;
+  align-items: center;
+  gap: var(--wp--preset--spacing--small);
+  padding: 0.4rem 0.75rem;
+  border: 2px solid var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--secondary);
+}
+.main-nav .wp-block-navigation__responsive-container-open::before {
+  content: "Sections";
+  font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.main-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
+  gap: var(--wp--preset--spacing--medium);
+}
+
+/*# sourceMappingURL=main.css.map */

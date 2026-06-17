@@ -1,0 +1,55 @@
+/*
+ * Site header layout.
+ *
+ * Structure (see parts/header.html):
+ *   .site-header
+ *     .site-header__bar        -> contained top row
+ *       .site-header__bar-inner  -> flex: brand <-> weather
+ *         .site-header__brand      -> wordmark + tagline
+ *         .site-header__weather    -> reserved slot (empty for now)
+ *     .site-header__nav        -> full-bleed faded strip w/ centered nav
+ */
+
+.site-header {
+	// The <header> carries `has-background` (white/inverse fill), so core applies
+	// its default `:where(.wp-block-group.has-background){padding:1.25em 2.375em}`.
+	// That would inset every child — including the full-bleed nav strip — from the
+	// screen edges. Reset it here and let each inner section own its own padding.
+	padding: 0;
+	border-bottom: 1px solid var(--wp--preset--color--secondary);
+
+	&__bar {
+		padding-block: var(--wp--preset--spacing--large);
+		padding-inline: var(--wp--preset--spacing--medium);
+	}
+
+	&__bar-inner {
+		gap: var(--wp--preset--spacing--large);
+	}
+
+	&__brand {
+		gap: var(--wp--preset--spacing--medium);
+	}
+
+	&__weather {
+		gap: var(--wp--preset--spacing--small);
+		min-height: 1px; // keeps the reserved slot from collapsing the flex row
+	}
+
+	&__nav {
+		// Flow layout adds a top margin between the bar and the nav; the bar's
+		// own padding already provides enough separation, so remove it.
+		margin-block-start: 0;
+		// Set both axes explicitly so the faded strip's size is driven by our
+		// tokens, not core's default has-background padding. Inline padding only
+		// matters once the viewport is narrower than the 1140px content width.
+		padding-block: var(--wp--preset--spacing--small);
+		padding-inline: var(--wp--preset--spacing--medium);
+		border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
+	}
+}
+
+.site-tagline {
+	margin: 0;
+	letter-spacing: 0.02em;
+}
