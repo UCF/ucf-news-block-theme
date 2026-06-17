@@ -1,16 +1,13 @@
-/*
- * UCF Today Block Theme styles entrypoint.
- *
- * Intentionally empty for initial scaffold.
- */
-.wp-block-post-content > p:first-of-type::first-letter {
+// Drop cap styles for the first letter of the first paragraph in post content. Based on styles from the UCF News website.
+.wp-block-post-content > p:first-of-type::first-letter  {
   float: left;
   font-size: 3rem;
   font-weight: 700;
   line-height: 2.75rem;
-  margin-right: 0.25rem;
+  margin-right: .25rem;
 }
 
+// Blockquote styles for single post content, with horizontal lines above and below the quote text. Based on styles from the UCF News website.
 .wp-block-pullquote {
   text-align: center;
   position: relative;
@@ -72,25 +69,31 @@
     margin-top: 0.75rem;
     text-align: left;
   }
+
   .wp-block-pullquote::before,
   .wp-block-pullquote::after {
     width: 100%;
   }
 }
+
 @media (min-width: 768px) {
   .wp-block-pullquote {
     width: 40%;
     margin-right: 45px;
   }
+
   .wp-block-pullquote blockquote p {
     font-size: 1.68rem;
   }
 }
+
 @media (min-width: 992px) {
   .wp-block-pullquote {
     margin-left: -45px;
   }
 }
+
+// Figure styles for single post content, with caption text below the image. Based on styles from the UCF News website.
 .wp-block-image {
   display: block;
   margin: 2.5rem auto;
@@ -106,7 +109,7 @@
 
 .wp-block-image figcaption {
   font-family: "Gotham SSm A", "Gotham SSm B", "UCF Sans Serif Alt", "Helvetica Neue", Arial, sans-serif;
-  font-size: max(0.7rem, 0.7em);
+  font-size: max(.7rem, .7em);
   color: #636c72;
 }
 
@@ -115,10 +118,9 @@
     font-size: 0.85rem;
   }
 }
+
 @media (min-width: 768px) {
   .wp-block-image {
     margin: 3.5rem auto;
   }
 }
-
-/*# sourceMappingURL=main.css.map */
