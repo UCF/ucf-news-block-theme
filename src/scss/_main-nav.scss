@@ -1,0 +1,87 @@
+/*
+ * Primary navigation (core wp:navigation block, .main-nav).
+ *
+ * Link typography is built from reusable tokens (UCF Sans Serif Alt, bold,
+ * uppercase, wide tracking). On tablet and below the block collapses to an
+ * overlay triggered by a button styled to read "SECTIONS" + the hamburger
+ * icon, to match the reference design.
+ */
+
+// Desktop entry point. At/above this width the inline menu is shown; below it
+// (tablet + mobile) the nav collapses to the "Sections" overlay. Core's block
+// only ships a 600px "mobile" breakpoint, so we extend the collapsed behavior
+// up to here. Adjust this single value to retune where the nav collapses.
+$nav-overlay-until: 1024px;
+
+.main-nav {
+	padding-block: var(--wp--preset--spacing--small);
+
+	// Link items
+	.wp-block-navigation-item__content {
+		font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--wp--preset--color--secondary);
+		text-decoration: none;
+	}
+
+	.wp-block-navigation-item__content:hover,
+	.wp-block-navigation-item__content:focus-visible {
+		color: var(--wp--preset--color--primary);
+	}
+
+	// Space items out on the horizontal (desktop) layout.
+	&.wp-block-navigation {
+		--wp--style--block-gap: clamp(1rem, 0.4rem + 1.6vw, 2.25rem);
+	}
+
+	// --- Collapse breakpoint override --------------------------------------
+	// Core only collapses at 600px ("mobile"). Re-assert the collapsed/overlay
+	// state across the tablet band (600px up to the desktop breakpoint) by
+	// overriding the core min-width:600px rules: show the open button that core
+	// hides, and keep the inline menu hidden until the overlay is opened. The
+	// `.is-menu-open` overlay rules live outside that media query, so opening
+	// still works. Selectors are scoped to `.main-nav.wp-block-navigation` to
+	// out-specify core without needing !important.
+	@media (min-width: 600px) and (max-width: #{$nav-overlay-until - 0.02px}) {
+		&.wp-block-navigation .wp-block-navigation__responsive-container-open:not(.always-shown) {
+			display: flex;
+		}
+
+		&.wp-block-navigation .wp-block-navigation__responsive-container:not(.is-menu-open) {
+			display: none;
+		}
+	}
+
+	// --- "Sections" toggle styling -----------------------------------------
+	// Visual styling only — when the button is shown vs. hidden is owned by core
+	// plus the breakpoint override above. We must NOT set `display` here, or
+	// we'd override core's responsive hide/show at desktop widths.
+	.wp-block-navigation__responsive-container-open {
+		// Push the button to the right regardless of the nav's center justify.
+		margin-inline-start: auto;
+		align-items: center;
+		gap: var(--wp--preset--spacing--small);
+		padding: 0.4rem 0.75rem;
+		border: 2px solid var(--wp--preset--color--secondary);
+		color: var(--wp--preset--color--secondary);
+
+		&::before {
+			content: "Sections";
+			font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+			font-weight: 700;
+			font-size: 0.8125rem;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+	}
+
+	// Stack links vertically inside the overlay.
+	.wp-block-navigation__responsive-container.is-menu-open
+		.wp-block-navigation__responsive-container-content
+		.wp-block-navigation__container {
+		gap: var(--wp--preset--spacing--medium);
+	}
+}

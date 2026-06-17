@@ -1,0 +1,36 @@
+/*
+ * Reusable, single-purpose utility classes.
+ *
+ * These cover presentational concerns that theme.json presets do NOT generate
+ * (font weight, text-transform, letter-spacing). Color, font-family, font-size
+ * and spacing already have preset classes / custom properties from theme.json,
+ * so they are intentionally not duplicated here.
+ */
+
+.u-uppercase {
+	text-transform: uppercase;
+}
+
+.u-tracking-wide {
+	letter-spacing: 0.04em;
+}
+
+.u-fw-light {
+	font-weight: 300;
+}
+
+.u-fw-regular {
+	font-weight: 400;
+}
+
+.u-fw-semibold {
+	font-weight: 600;
+}
+
+.u-fw-bold {
+	font-weight: 700;
+}
+
+.u-fw-black {
+	font-weight: 900;
+}

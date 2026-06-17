@@ -1,0 +1,44 @@
+/*
+ * "UCF Today" wordmark.
+ *
+ * Deliberately element-specific: the two-tone treatment (gold "UCF" + black
+ * "Today") is unique to this mark, so it owns its own component class rather
+ * than leaning on shared utilities.
+ */
+
+.site-wordmark {
+	display: inline-flex;
+	align-items: baseline;
+	font-family: var(--wp--preset--font-family--ucf-slab-serif-alt);
+	font-weight: 800;
+	font-size: clamp(1.5rem, 1.15rem + .8vw, 1.8rem);
+	line-height: 1;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+
+	&__lead {
+		font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+		margin-inline-end: 0.15em;
+		color: var(--wp--preset--color--primary);
+	}
+
+	&__rest {
+		// inherits the serif set on .site-wordmark
+		color: var(--wp--preset--color--secondary);
+		// Reduce the font weight
+		font-weight: 400;
+		// Render as "Today" (title case) rather than inheriting the parent's
+		// uppercase transform.
+		text-transform: none;
+		// The slab serif's cap height reads shorter than the sans "UCF" at the
+		// same size; nudge it up so the capital "T" matches. Tune to taste.
+		font-size: 1.1em;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--wp--preset--color--primary);
+		outline-offset: 4px;
+	}
+}

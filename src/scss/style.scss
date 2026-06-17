@@ -1,6 +1,17 @@
 /*
  * UCF Today Block Theme styles entrypoint.
  *
- * Intentionally empty for initial scaffold.
+ * Most color, font-family, font-size and spacing values are tokenized in
+ * theme.json and consumed either through WordPress preset classes
+ * (e.g. `.has-primary-color`, `.has-ucf-condensed-alt-font-family`) in block
+ * markup, or through the generated CSS custom properties
+ * (e.g. `var(--wp--preset--color--primary)`) in the partials below.
+ *
+ * Partials are split into reusable utilities and element-specific components.
  */
+
+@use 'utilities';
+@use 'site-header';
+@use 'wordmark';
+@use 'main-nav';
 @use 'content';
