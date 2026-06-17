@@ -49,6 +49,11 @@
 					"color": "#6c757d",
 					"name": "Muted",
 					"slug": "muted"
+				},
+				{
+					"color": "#f7f7f7",
+					"name": "Faded (Light Gray)",
+					"slug": "faded"
 				}
 			]
 		},
@@ -56,7 +61,56 @@
 			"contentSize": "760px",
 			"wideSize": "950px"
 		},
+		"spacing": {
+			"spacingScale": {
+				"steps": 0
+			},
+			"spacingSizes": [
+				{
+					"slug": "small",
+					"name": "Small",
+					"size": "0.5rem"
+				},
+				{
+					"slug": "medium",
+					"name": "Medium",
+					"size": "1rem"
+				},
+				{
+					"slug": "large",
+					"name": "Large",
+					"size": "1.5rem"
+				},
+				{
+					"slug": "x-large",
+					"name": "Extra Large",
+					"size": "2rem"
+				}
+			]
+		},
 		"typography": {
+			"fontSizes": [
+				{
+					"slug": "small",
+					"name": "Small",
+					"size": "0.875rem"
+				},
+				{
+					"slug": "medium",
+					"name": "Medium",
+					"size": "1rem"
+				},
+				{
+					"slug": "large",
+					"name": "Large",
+					"size": "1.25rem"
+				},
+				{
+					"slug": "x-large",
+					"name": "Extra Large",
+					"size": "1.75rem"
+				}
+			],
 			"fontFamilies": [
 				{
 					"fontFamily": "'UCF Sans Serif Alt', 'Helvetica Neue', Arial, sans-serif",
