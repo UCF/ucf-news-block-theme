@@ -149,8 +149,8 @@
 							"fontWeight": "400",
 							"fontStyle": "normal",
 							"src": [
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff2",
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff"
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff"
 							]
 						},
 						{
@@ -158,8 +158,8 @@
 							"fontWeight": "500",
 							"fontStyle": "normal",
 							"src": [
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2",
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff"
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff"
 							]
 						},
 						{
@@ -167,8 +167,8 @@
 							"fontWeight": "600",
 							"fontStyle": "normal",
 							"src": [
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff2",
-								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff"
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2",
+								"file:./assets/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff"
 							]
 						},
 						{
@@ -265,6 +265,75 @@
 	"styles": {
 		"spacing": {
 			"blockGap": "1.5rem"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+			"fontSize": "clamp(0.875rem, 2vw, 1rem)",
+			"fontWeight": "400",
+			"lineHeight": "1.65"
+		},
+		"elements": {
+			"h1": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(2rem, 4vw, 2.5rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(1.7rem, 3.5vw, 2rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(1.45rem, 3vw, 1.75rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(1.2rem, 2.5vw, 1.5rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(1rem, 2vw, 1.25rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontSize": "clamp(0.75rem, 1.5vw, 1rem)",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				}
+			},
+			"p": {
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "1rem"
+					}
+				}
+			},
+			"link": {
+				"color": {
+					"text": "#0262b6"
+				}
+			}
 		}
 	}
 }
