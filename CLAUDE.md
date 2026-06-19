@@ -15,6 +15,30 @@ This scaffold is intentionally minimal and style-light.
 3. Prefer reusable blocks, patterns, and template parts over one-off markup.
 4. Keep accessibility requirements first-class in all UI decisions.
 5. Keep editorial flexibility high and avoid rigid page-specific implementations.
+6. Only output proper, semantic HTML in templates, template parts, and patterns.
+   Do not repurpose blocks in ways that produce non-semantic markup — for
+   example, never use a block that renders an anchor (`<a>`) for display-only
+   text that does not link anywhere. When a core block would emit incorrect
+   markup for the intended purpose, build a custom block that renders the
+   correct, meaningful element (see "Custom Blocks" below).
+
+## Custom Blocks
+
+Custom blocks live in `blocks/<block-name>/` and are server-rendered (no JS
+build step). Define each with this standard structure:
+
+- `blocks/<block-name>/block.json` — block metadata. Use `apiVersion` 3, the
+  `ucf-today/<block-name>` namespace, declare any needed `usesContext` (e.g.
+  `postId`), and reference the renderer with `"render": "file:./render.php"`.
+- `blocks/<block-name>/render.php` — the server render. Read context off
+  `$block->context`, resolve data through a helper in `includes/`, escape all
+  output, and emit semantic markup using `get_block_wrapper_attributes()`.
+
+Register every block on `init` inside `ucf_today_register_blocks()` in
+`functions.php` via `register_block_type()`. Keep reusable data-resolution
+logic in `includes/` functions (prefixed `ucf_today_`) so it stays testable and
+out of the render templates. Existing examples: `blocks/post-category` and
+`blocks/post-byline`.
 
 ## Initial Constraints
 

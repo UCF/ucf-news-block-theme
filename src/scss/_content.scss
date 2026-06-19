@@ -9,6 +9,33 @@
   }
 }
 
+// Add a little breathing room above the post header meta.
+.post-header__meta {
+  margin-top: var(--wp--preset--spacing--large);
+}
+
+// The category is output as a plain paragraph (see the ucf-today/post-category
+// block) so it carries no default paragraph spacing.
+.post-header__category {
+  margin: 0;
+}
+
+// Byline: author plus published / original publish dates (see the
+// ucf-today/post-byline block).
+.post-header__byline {
+  p {
+    margin: 0;
+  }
+
+  .post-header__byline-dates {
+    margin-top: var(--wp--preset--spacing--small);
+  }
+}
+
+.post-header__byline-sep {
+  padding-inline: 0.5rem;
+}
+
 // Drop cap styles for the first letter of the first paragraph in post content. Based on styles from the UCF News website.
 .wp-block-post-content > p:first-of-type::first-letter  {
   float: left;
