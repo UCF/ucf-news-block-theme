@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/post-byline",
+	"title": "Post Byline",
+	"category": "text",
+	"description": "Outputs the post byline (\"By {author}\"), resolving custom author meta, the assigned Author term, or the original publisher.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "author", "byline", "post" ],
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": false,
+			"link": false
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontWeight": true,
+			"__experimentalTextTransform": true,
+			"__experimentalLetterSpacing": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"render": "file:./render.php"
+}

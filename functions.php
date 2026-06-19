@@ -6,6 +6,20 @@
  */
 
 include_once get_template_directory() . '/includes/post-functions.php';
+include_once get_template_directory() . '/includes/author-functions.php';
+include_once get_template_directory() . '/includes/header-media-functions.php';
+
+if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
+	/**
+	 * Registers the theme's custom blocks from their block.json metadata.
+	 */
+	function ucf_today_register_blocks() {
+		register_block_type( get_template_directory() . '/blocks/post-category' );
+		register_block_type( get_template_directory() . '/blocks/post-byline' );
+		register_block_type( get_template_directory() . '/blocks/post-header-media' );
+	}
+}
+add_action( 'init', 'ucf_today_register_blocks' );
 
 
 if ( ! function_exists( 'ucf_today_block_theme_setup' ) ) {

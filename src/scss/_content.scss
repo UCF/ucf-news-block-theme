@@ -9,6 +9,67 @@
   }
 }
 
+// Add a little breathing room above the post header meta.
+.post-header__meta {
+  margin-top: var(--wp--preset--spacing--large);
+}
+
+// The category is output as a plain paragraph (see the ucf-today/post-category
+// block) so it carries no default paragraph spacing.
+.post-header__category {
+  margin: 0;
+}
+
+// Byline: author plus published / original publish dates (see the
+// ucf-today/post-byline block).
+.post-header__byline {
+  p {
+    margin: 0;
+  }
+
+  .post-header__byline-dates {
+    margin-top: var(--wp--preset--spacing--small);
+  }
+}
+
+.post-header__byline-sep {
+  padding-inline: 0.5rem;
+}
+
+// Header media: an image (with optional caption) or a video embed
+// (see the ucf-today/post-header-media block).
+.post-header__media {
+  margin: var(--wp--preset--spacing--large) auto 0;
+
+  .post-header__media-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  // Keep oEmbed videos responsive and locked to a 16:9 aspect ratio. The
+  // embed's intrinsic ratio is unknown, so we enforce 16:9 (the YouTube/Vimeo
+  // default) on the wrapper and have the iframe/video fill it.
+  .post-header__media-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+
+    iframe,
+    video,
+    embed,
+    object {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.post-header__media-caption {
+  margin-top: var(--wp--preset--spacing--small);
+}
+
 // Drop cap styles for the first letter of the first paragraph in post content. Based on styles from the UCF News website.
 .wp-block-post-content > p:first-of-type::first-letter  {
   float: left;
