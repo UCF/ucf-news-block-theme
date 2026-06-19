@@ -2,7 +2,7 @@
 /**
  * Server-side render for the ucf-today/post-category block.
  *
- * Outputs the post's primary category name as plain, semantic text — a
+ * Outputs the post's first assigned category name as plain, semantic text — a
  * paragraph rather than the linked term list that core/post-terms produces.
  *
  * @var array    $attributes Block attributes.
@@ -28,4 +28,4 @@ $ucf_category_wrapper = get_block_wrapper_attributes(
 	array( 'class' => 'post-header__category' )
 );
 ?>
-<p <?php echo wp_kses_data( $ucf_category_wrapper ); ?>><?php echo esc_html( $ucf_category_name ); ?></p>
+<p <?php echo $ucf_category_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() is already escaped. ?>><?php echo esc_html( $ucf_category_name ); ?></p>

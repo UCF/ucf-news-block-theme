@@ -40,9 +40,9 @@ if ( ! function_exists( 'ucf_today_get_post_header_media_data' ) ) {
 			return $media;
 		}
 
-		$header_type   = get_field( 'header_media_type', $post ) ?: 'image';
+		$header_type = get_field( 'header_media_type', $post );
+		$header_type = ( 'video' === $header_type ) ? 'video' : 'image';
 		$media['type'] = $header_type;
-
 		if ( 'video' === $header_type ) {
 			// ACF oEmbed fields return ready-to-print embed markup.
 			$media['video'] = (string) get_field( 'post_header_video_url', $post );

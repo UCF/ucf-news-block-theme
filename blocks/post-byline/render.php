@@ -35,10 +35,10 @@ $ucf_byline_wrapper = get_block_wrapper_attributes(
 
 $ucf_byline_sep = '<span class="post-header__byline-sep" aria-hidden="true">|</span>';
 ?>
-<div <?php echo wp_kses_data( $ucf_byline_wrapper ); ?>>
+<div <?php echo $ucf_byline_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() is already escaped. ?>>
 	<p class="post-header__byline-primary">
 		<?php if ( $ucf_byline_name ) : ?>
-			<span class="post-header__byline-author">By <?php echo esc_html( $ucf_byline_name ); ?></span>
+			<span class="post-header__byline-author"><?php echo esc_html__( 'By', 'ucf-news-block-theme' ); ?> <?php echo esc_html( $ucf_byline_name ); ?></span>
 			<?php
 			// When there's a single date, show it inline next to the author.
 			if ( ! $ucf_byline_orig ) {
@@ -54,9 +54,9 @@ $ucf_byline_sep = '<span class="post-header__byline-sep" aria-hidden="true">|</s
 
 	<?php if ( $ucf_byline_orig ) : ?>
 	<p class="post-header__byline-dates">
-		<span class="post-header__byline-date"><strong>Originally Published</strong> <?php echo esc_html( $ucf_byline_orig ); ?></span>
+		<span class="post-header__byline-date"><strong><?php echo esc_html__( 'Originally Published', 'ucf-news-block-theme' ); ?></strong> <?php echo esc_html( $ucf_byline_orig ); ?></span>
 		<?php echo wp_kses_post( $ucf_byline_sep ); ?>
-		<span class="post-header__byline-date"><strong>Updated on</strong> <?php echo esc_html( $ucf_byline_pub ); ?></span>
+		<span class="post-header__byline-date"><strong><?php echo esc_html__( 'Updated on', 'ucf-news-block-theme' ); ?></strong> <?php echo esc_html( $ucf_byline_pub ); ?></span>
 	</p>
 	<?php endif; ?>
 </div>

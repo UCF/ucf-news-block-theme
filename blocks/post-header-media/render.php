@@ -30,7 +30,7 @@ if ( 'video' === $ucf_media['type'] ) {
 		return;
 	}
 	?>
-	<figure <?php echo wp_kses_data( $ucf_media_wrapper ); ?>>
+	<figure <?php echo $ucf_media_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() is already escaped. ?>>
 		<div class="post-header__media-video">
 			<?php echo $ucf_media['video']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ACF oEmbed returns trusted embed markup. ?>
 		</div>
@@ -58,7 +58,7 @@ if ( ! $ucf_media_image ) {
 	return;
 }
 ?>
-<figure <?php echo wp_kses_data( $ucf_media_wrapper ); ?>>
+<figure <?php echo $ucf_media_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() is already escaped. ?>>
 	<?php echo $ucf_media_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() returns safe markup. ?>
 
 	<?php if ( $ucf_media_caption ) : ?>

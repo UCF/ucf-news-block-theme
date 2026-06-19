@@ -4,7 +4,7 @@
 	"name": "ucf-today/post-category",
 	"title": "Post Category",
 	"category": "text",
-	"description": "Outputs the post's primary category name as plain text (no link).",
+	"description": "Outputs the post's first category name as plain text (no link).", 
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "category", "term", "post" ],
 	"usesContext": [ "postId" ],

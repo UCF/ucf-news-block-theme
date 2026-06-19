@@ -130,19 +130,23 @@ if ( ! function_exists( 'ucf_today_get_post_byline_data' ) ) {
 		$author_data           = ucf_today_get_post_author_data( $post, true );
 		$byline_data['author'] = $author_data['name'] ?? '';
 
-		$date_format    = 'F j, Y';
-		$published_date = date_i18n( $date_format, strtotime( $post->post_date ) );
+		$date_format = 'F j, Y';
 
+		$published_date = get_the_date( $date_format, $post );
 		$byline_data['published_date'] = $published_date;
 
 		$orig_date_val = function_exists( 'get_field' ) ? get_field( 'post_header_publish_date', $post ) : '';
 
 		if ( ! empty( $orig_date_val ) ) {
-			$original_date = date_i18n( $date_format, strtotime( $orig_date_val ) );
+			$original_timestamp = strtotime( $orig_date_val );
 
-			// Only meaningful when it differs from the published/updated date.
-			if ( $original_date !== $published_date ) {
-				$byline_data['original_date'] = $original_date;
+			if ( false !== $original_timestamp ) {
+				$original_date = wp_date( $date_format, $original_timestamp );
+
+				// Only meaningful when it differs from the published/updated date.
+				if ( $original_date !== $published_date ) {
+					$byline_data['original_date'] = $original_date;
+				}
 			}
 		}
 
