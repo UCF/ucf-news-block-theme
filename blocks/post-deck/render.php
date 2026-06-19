@@ -25,7 +25,7 @@ if ( '' === $ucf_deck ) {
 }
 
 $ucf_deck_wrapper = get_block_wrapper_attributes(
-	array( 'class' => 'post-header__deck lead' )
+	array( 'class' => 'post-header__deck u-text-lead' )
 );
 ?>
 <div <?php echo $ucf_deck_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() is already escaped. ?>>
