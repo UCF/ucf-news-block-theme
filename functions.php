@@ -5,6 +5,9 @@
  * @package UCF_Today_Block_Theme
  */
 
+include_once get_template_directory() . '/includes/post-functions.php';
+
+
 if ( ! function_exists( 'ucf_today_block_theme_setup' ) ) {
 	/**
 	 * Registers basic theme supports for block-theme behavior.
