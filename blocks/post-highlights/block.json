@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/post-highlights",
+	"title": "Post Highlights",
+	"category": "text",
+	"description": "Outputs the post's highlights as an \"Highlights\" heading followed by an unordered list. Renders nothing when no highlights are set.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "highlights", "summary", "post" ],
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"render": "file:./render.php"
+}
