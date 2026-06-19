@@ -4,7 +4,7 @@
 	"name": "ucf-today/post-highlights",
 	"title": "Post Highlights",
 	"category": "text",
-	"description": "Outputs the post's highlights as an \"Highlights\" heading followed by an unordered list. Renders nothing when no highlights are set.",
+	"description": "Outputs the post's highlights as a \"Highlights\" heading followed by an unordered list. Renders nothing when no highlights are set.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "highlights", "summary", "post" ],
 	"usesContext": [ "postId" ],

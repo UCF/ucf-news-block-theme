@@ -2,7 +2,7 @@
 /**
  * Server-side render for the ucf-today/post-highlights block.
  *
- * Outputs an "Highlights" heading (uppercase, underlined) followed by an
+ * Outputs a "Highlights" heading (uppercase, underlined) followed by an
  * unordered list of the post's highlights. Adapted from the legacy
  * Today-Child-Theme `today_get_post_highlights()` output. Renders nothing
  * when no highlights are set.
