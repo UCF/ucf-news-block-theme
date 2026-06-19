@@ -13,7 +13,7 @@
  * @since 1.0.0
  * @author Jim Barnes
  */
-function today_add_post_custom_fields() {
+function ucf_today_add_post_custom_fields() {
 	if ( function_exists( 'acf_add_local_field_group' ) ) {
 
 		// Create the array to add the fields to
@@ -42,7 +42,7 @@ function today_add_post_custom_fields() {
 			'label'             => 'Deck',
 			'name'              => 'post_header_deck',
 			'type'              => 'wysiwyg',
-			'instructions'      => 'Appears below the title on a single post.	Is also used as excerpt text within lists of posts.',
+			'instructions'      => 'Appears below the title on a single post. Is also used as excerpt text within lists of posts.',
 			'toolbar'           => 'inline_text',
 			'media_upload'      => 0,
 		);
@@ -347,7 +347,7 @@ function today_add_post_custom_fields() {
 	}
 }
 
-add_action( 'acf/init', 'today_add_post_custom_fields' );
+add_action( 'acf/init', 'ucf_today_add_post_custom_fields' );
 
 
 /**
@@ -360,7 +360,7 @@ add_action( 'acf/init', 'today_add_post_custom_fields' );
  * @since 1.0.0
  * @author Jim Barnes
  */
-function today_add_main_site_news_fields() {
+function ucf_today_add_main_site_news_fields() {
 	if ( function_exists( 'acf_add_local_field_group' ) ) {
 
 		// Create the array to add the fields to
@@ -414,4 +414,4 @@ function today_add_main_site_news_fields() {
 	}
 }
 
-add_action( 'acf/init', 'today_add_main_site_news_fields' );
+add_action( 'acf/init', 'ucf_today_add_main_site_news_fields' );
