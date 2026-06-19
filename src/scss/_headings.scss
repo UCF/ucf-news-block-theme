@@ -1,0 +1,22 @@
+// Underlined heading treatment, ported from the UCF Athena Framework
+// `.heading-underline` style: an uppercase, sans-serif heading with a short
+// brand-colored rule beneath it. Reusable across the theme.
+.heading-underline {
+  display: block;
+  position: relative;
+  margin-bottom: 1rem;
+  padding-bottom: 0.65rem;
+  font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 1em;
+    min-width: 2rem;
+    height: 0;
+    border-bottom: 0.25rem solid var(--wp--preset--color--primary);
+  }
+}

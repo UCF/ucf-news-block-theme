@@ -20,6 +20,30 @@
   margin: 0;
 }
 
+// Highlights: an underlined "Highlights" heading with a bulleted list
+// (see the ucf-today/post-highlights block). The list bullets are aligned
+// flush with the heading's left edge rather than indented.
+.post-highlights__list {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.post-highlights__item {
+  margin-bottom: var(--wp--preset--spacing--small);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // WYSIWYG highlight text is wrapped in a paragraph; keep it inline so the
+  // bullet marker and text sit on the same line as the marker.
+  p {
+    display: inline;
+    margin: 0;
+  }
+}
+
 // Byline: author plus published / original publish dates (see the
 // ucf-today/post-byline block).
 .post-header__byline {
