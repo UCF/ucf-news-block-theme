@@ -203,12 +203,18 @@
   display: block;
 }
 
+.wp-caption  {
+	width: 100% !important;
+	height: auto !important;
+}
+
 figcaption,
 .wp-element-caption,
 .figure-caption {
   font-family: "Gotham SSm A", "Gotham SSm B", "UCF Sans Serif Alt", "Helvetica Neue", Arial, sans-serif;
   font-size: max(.7rem, .7em);
   color: #636c72;
+	text-align:left;;
 }
 
 @media (min-width: 768px) {
