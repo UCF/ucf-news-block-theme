@@ -47,11 +47,22 @@
     height: auto;
   }
 
-  // Keep oEmbed videos responsive within the media wrapper.
-  iframe,
-  video {
-    display: block;
-    width: 100%;
+  // Keep oEmbed videos responsive and locked to a 16:9 aspect ratio. The
+  // embed's intrinsic ratio is unknown, so we enforce 16:9 (the YouTube/Vimeo
+  // default) on the wrapper and have the iframe/video fill it.
+  .post-header__media-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+
+    iframe,
+    video,
+    embed,
+    object {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
