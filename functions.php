@@ -16,6 +16,7 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	 */
 	function ucf_today_register_blocks() {
 		register_block_type( get_template_directory() . '/blocks/post-category' );
+		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
 		register_block_type( get_template_directory() . '/blocks/post-header-media' );
 		register_block_type( get_template_directory() . '/blocks/post-highlights' );

@@ -15,6 +15,21 @@
 	letter-spacing: 0.04em;
 }
 
+.small {
+	font-size: 0.875em;
+}
+
+// Lead paragraph treatment (e.g. the post deck).
+.lead {
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.65;
+
+	@media (min-width: 768px) {
+		font-size: 1.4rem;
+	}
+}
+
 .u-fw-light {
 	font-weight: 300;
 }

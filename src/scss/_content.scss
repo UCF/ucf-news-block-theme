@@ -44,9 +44,24 @@
   }
 }
 
+// Deck: the lead paragraph(s) below the title (see the ucf-today/post-deck
+// block). The WYSIWYG value brings its own paragraph markup, so trim the
+// outer margins to sit cleanly within the header.
+.post-header__deck {
+  p {
+    margin-top: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // Byline: author plus published / original publish dates (see the
 // ucf-today/post-byline block).
 .post-header__byline {
+  letter-spacing: 0.1em;
+
   p {
     margin: 0;
   }

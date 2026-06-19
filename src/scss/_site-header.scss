@@ -16,7 +16,6 @@
 	// That would inset every child — including the full-bleed nav strip — from the
 	// screen edges. Reset it here and let each inner section own its own padding.
 	padding: 0;
-	border-bottom: 1px solid var(--wp--preset--color--secondary);
 
 	&__bar {
 		padding-block: var(--wp--preset--spacing--large);
@@ -46,6 +45,7 @@
 		padding-block: var(--wp--preset--spacing--small);
 		padding-inline: var(--wp--preset--spacing--medium);
 		border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
+		border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
 	}
 }
 
