@@ -1,7 +1,7 @@
 /*
  * Tag cloud block.
  *
- * Structure (see parts/today-tag-cloud.html or wherever the block lives):
+ * Structure (see parts/tag-cloud.html or wherever the block lives):
  *   .today-tag-cloud
  *     h2                  -> "More Topics" label, small/uppercase
  *     wp:post-terms       -> renders a flat run of <a> tags, one per term
