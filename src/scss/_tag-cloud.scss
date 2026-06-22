@@ -45,12 +45,11 @@
     // `a { color: #0262b6; text-decoration: underline; }` rule, and to
     // override the site-wide hover/focus underline + blue color.
     &:active,
-    &:focus,
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: #d6d6d6;
       color: #3d3d3d;
       text-decoration: none;
-      outline: 0;
     }
   }
 }
