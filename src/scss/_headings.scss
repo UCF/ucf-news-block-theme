@@ -44,3 +44,23 @@ hr {
   	border-width: 1px;
 	}
 }
+
+dl,
+ol,
+ul {
+  margin-top:0;
+  margin-bottom:1rem
+}
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin-bottom:0
+}
+dt {
+  font-weight:700
+}
+dd {
+  margin-bottom:.5rem;
+  margin-left:0
+}
