@@ -9,17 +9,39 @@ include_once get_template_directory() . '/includes/post-functions.php';
 include_once get_template_directory() . '/includes/author-functions.php';
 include_once get_template_directory() . '/includes/header-media-functions.php';
 include_once get_template_directory() . '/includes/highlights-functions.php';
+include_once get_template_directory() . '/includes/story-functions.php';
 
 if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	/**
 	 * Registers the theme's custom blocks from their block.json metadata.
 	 */
 	function ucf_today_register_blocks() {
+		// Register the Story block's editor script with explicit dependencies
+		// (no build step, so there is no generated asset manifest). The handle
+		// matches the `editorScript` value in blocks/story/block.json.
+		$ucf_story_editor = '/blocks/story/index.js';
+		wp_register_script(
+			'ucf-today-story-editor',
+			get_template_directory_uri() . $ucf_story_editor,
+			array(
+				'wp-blocks',
+				'wp-block-editor',
+				'wp-components',
+				'wp-data',
+				'wp-element',
+				'wp-i18n',
+				'wp-server-side-render',
+			),
+			(string) filemtime( get_template_directory() . $ucf_story_editor ),
+			true
+		);
+
 		register_block_type( get_template_directory() . '/blocks/post-category' );
 		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
 		register_block_type( get_template_directory() . '/blocks/post-header-media' );
 		register_block_type( get_template_directory() . '/blocks/post-highlights' );
+		register_block_type( get_template_directory() . '/blocks/story' );
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );

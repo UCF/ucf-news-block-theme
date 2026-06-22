@@ -1,0 +1,104 @@
+// Story block (see the ucf-today/story block). One block, four layout
+// variants selected via the `variant` attribute, each rendered as a single
+// <article> with a linked title. Spacing uses theme.json tokens.
+
+.story {
+  // Image fills its slot and crops via the registered 3:2 image sizes.
+  .story__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .story__media {
+    display: block;
+  }
+
+  // Title: the only linked element. Inherits heading fonts from theme.json.
+  .story__title {
+    margin: 0;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .story__excerpt {
+    margin: var(--wp--preset--spacing--small) 0 0;
+  }
+
+  .story__category {
+    margin: 0 0 var(--wp--preset--spacing--small);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--muted);
+  }
+
+  .story__date {
+    display: block;
+    margin-top: var(--wp--preset--spacing--medium);
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--muted);
+  }
+}
+
+// 1. Feature: image left, text right; collapses to stacked on mobile.
+.story--feature {
+  display: grid;
+  gap: var(--wp--preset--spacing--large);
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--wp--preset--spacing--x-large);
+  }
+
+  .story__title {
+    font-size: 1.4rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+// 2. Card: image on top, then title, then excerpt.
+// 3. Card (title only): same stack without the excerpt.
+.story--stacked,
+.story--stacked-title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--medium);
+
+  .story__title {
+    font-size: 1rem;
+  }
+}
+
+// 4. Inline: small thumbnail (~33%) left, category + title right. Used within
+// story body copy; collapses gracefully but stays side-by-side by default.
+.story--inline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2fr;
+  gap: var(--wp--preset--spacing--medium);
+  align-items: start;
+
+  .story__title {
+    font-size: 1rem;
+  }
+}
+
+// Editor-only placeholder shown before a story is picked.
+.story--placeholder {
+  padding: var(--wp--preset--spacing--large);
+  border: 1px dashed var(--wp--preset--color--muted);
+  text-align: center;
+  color: var(--wp--preset--color--muted);
+}
