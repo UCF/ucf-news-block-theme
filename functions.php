@@ -19,7 +19,8 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 		// Register the Story block's editor script with explicit dependencies
 		// (no build step, so there is no generated asset manifest). The handle
 		// matches the `editorScript` value in blocks/story/block.json.
-		$ucf_story_editor = '/blocks/story/index.js';
+		$ucf_story_editor      = '/blocks/story/index.js';
+		$ucf_story_editor_path = get_template_directory() . $ucf_story_editor;
 		wp_register_script(
 			'ucf-today-story-editor',
 			get_template_directory_uri() . $ucf_story_editor,
@@ -29,10 +30,11 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 				'wp-components',
 				'wp-data',
 				'wp-element',
+				'wp-html-entities',
 				'wp-i18n',
 				'wp-server-side-render',
 			),
-			(string) filemtime( get_template_directory() . $ucf_story_editor ),
+			file_exists( $ucf_story_editor_path ) ? (string) filemtime( $ucf_story_editor_path ) : null,
 			true
 		);
 

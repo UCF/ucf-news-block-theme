@@ -29,8 +29,10 @@ if ( isset( $block->context['queryId'] ) ) {
 	$ucf_story_post_id = ! empty( $attributes['postId'] ) ? $attributes['postId'] : null;
 
 	// During a ServerSideRender preview in the editor there is no loop
-	// context, so honor the post_id passed by the edit component (REST only).
-	if ( ! $ucf_story_post_id && defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_GET['post_id'] ) ) {
+	// context, so honor the post_id passed by the edit component. Gated on the
+	// edit_posts capability so arbitrary REST callers can't steer output via
+	// ?post_id= on public endpoints.
+	if ( ! $ucf_story_post_id && defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_GET['post_id'] ) && current_user_can( 'edit_posts' ) ) {
 		$ucf_story_post_id = absint( wp_unslash( $_GET['post_id'] ) );
 	}
 

@@ -18,6 +18,7 @@
 	const { useSelect } = wp.data;
 	const ServerSideRender = wp.serverSideRender;
 	const { __ } = wp.i18n;
+	const { decodeEntities } = wp.htmlEntities;
 
 	const VARIANT_OPTIONS = [
 		{ label: __( 'Feature (image left, text right)', 'ucf-news-block-theme' ), value: 'feature' },
@@ -49,16 +50,19 @@
 			[ search, postId ]
 		);
 
+		const labelFor = ( post ) =>
+			decodeEntities( post.title.rendered ) || __( '(no title)', 'ucf-news-block-theme' );
+
 		const options = ( posts || [] ).map( ( post ) => ( {
 			value: post.id,
-			label: post.title.rendered || __( '(no title)', 'ucf-news-block-theme' ),
+			label: labelFor( post ),
 		} ) );
 
 		// Ensure the currently selected post is always present as an option.
 		if ( selected && ! options.some( ( o ) => o.value === selected.id ) ) {
 			options.unshift( {
 				value: selected.id,
-				label: selected.title.rendered || __( '(no title)', 'ucf-news-block-theme' ),
+				label: labelFor( selected ),
 			} );
 		}
 
