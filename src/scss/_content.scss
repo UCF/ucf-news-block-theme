@@ -21,7 +21,8 @@
 
 // Blockquote styles for single post content, with horizontal lines above and
 // below the quote text. Based on styles from the UCF News website.
-.wp-block-pullquote {
+.wp-block-pullquote,
+blockquote:not(.wp-block-pullquote blockquote) {
   text-align: center;
   position: relative;
   border: 0;
@@ -30,16 +31,13 @@
   width: 75%;
   margin: 2.5rem auto;
 
-  blockquote {
+  blockquote p,
+  > p {
+    font-family: "Archer A", "Archer B", "UCF Slab Serif Alt", serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
     margin: 0;
-
-    p {
-      font-family: "Archer A", "Archer B", "UCF Slab Serif Alt", serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      line-height: 1.5;
-      margin: 0;
-    }
   }
 
   cite {
@@ -71,7 +69,8 @@
     margin-top: 1rem;
   }
 
-  @media (min-width: 576px) {
+  // Changed from 576px to 754px
+  @media (min-width: 754px) {
     float: left;
     clear: both;
     width: calc(40% - 30px);
@@ -90,7 +89,8 @@
     width: 40%;
     margin-right: 45px;
 
-    blockquote p {
+    blockquote p,
+    > p {
       font-size: 1.68rem;
     }
   }
@@ -100,8 +100,53 @@
   }
 }
 
-// Figure styles for single post content, with caption text below the image.
-// Based on styles from the UCF News website.
+// Figure and caption styles, based on styles from the UCF News website.
+// Resets browser and Athena framework figure margins before rebuilding.
+figure,
+.figure {
+  margin: 0;
+}
+
+figure.wp-caption,
+figure.figure {
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 2rem;
+  }
+}
+
+figure.figure.float-left,
+figure.wp-caption.alignleft {
+  float: left;
+  margin: 0 30px 1.25rem 0;
+
+  @media (min-width: 768px) {
+    margin-right: 45px;
+  }
+}
+
+figure.figure.float-right,
+figure.wp-caption.alignright {
+  float: right;
+  margin: 0 0 1.25rem 30px;
+
+  @media (min-width: 768px) {
+    margin-left: 45px;
+  }
+}
+
+@media (max-width: 575px) {
+  figure.figure.float-left,
+  figure.figure.float-right,
+  figure.wp-caption.alignleft,
+  figure.wp-caption.alignright {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .wp-block-image {
   display: block;
   margin: 2.5rem auto;
@@ -131,4 +176,30 @@ figcaption,
   font-size: max(.7rem, .7em);
   color: #636c72;
   text-align: left;
+}
+
+// When a pullquote is the only block in a column, treat it like a float
+// Changed to only apply at 754px+
+@media (min-width: 754px) {
+  .wp-block-columns:has(> .wp-block-column > .wp-block-pullquote) {
+    display: block;
+
+    > .wp-block-column:has(> .wp-block-pullquote) {
+      float: left;
+      width: 40% !important;
+      flex-basis: unset !important;
+    }
+
+    > .wp-block-column:not(:has(> .wp-block-pullquote)) {
+      float: none;
+      width: 100% !important;
+      flex-basis: unset !important;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
 }
