@@ -30,7 +30,7 @@ if ( ! $ucf_byline_pub ) {
 }
 
 $ucf_byline_wrapper = get_block_wrapper_attributes(
-	array( 'class' => 'post-header__byline' )
+	array( 'class' => 'post-header__byline has-small-font-size' )
 );
 
 $ucf_byline_sep = '<span class="post-header__byline-sep" aria-hidden="true">|</span>';

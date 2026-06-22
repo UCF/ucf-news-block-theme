@@ -15,6 +15,25 @@
 	letter-spacing: 0.04em;
 }
 
+// Prefer the generated `has-small-font-size` preset class. `.small` is kept as
+// a backwards-compatible alias that reuses the same `small` font-size token.
+.small {
+	font-size: var(--wp--preset--font-size--small);
+}
+
+// Lead paragraph treatment (e.g. the post deck). `.lead` is kept as a
+// backwards-compatible alias of `.u-text-lead`.
+.u-text-lead,
+.lead {
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.65;
+
+	@media (min-width: 768px) {
+		font-size: 1.4rem;
+	}
+}
+
 .u-fw-light {
 	font-weight: 300;
 }
