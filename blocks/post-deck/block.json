@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/post-deck",
+	"title": "Post Deck",
+	"category": "text",
+	"description": "Outputs the post's deck (the post_header_deck WYSIWYG field) in a div with the lead text treatment. Renders nothing when no deck is set.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "deck", "subhead", "lead", "post" ],
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": false,
+			"link": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"render": "file:./render.php"
+}
