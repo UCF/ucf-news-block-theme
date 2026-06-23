@@ -11,6 +11,7 @@ include_once get_template_directory() . '/includes/header-media-functions.php';
 include_once get_template_directory() . '/includes/highlights-functions.php';
 include_once get_template_directory() . '/includes/story-functions.php';
 include_once get_template_directory() . '/includes/resource-link-functions.php';
+include_once get_template_directory() . '/includes/weather-layouts.php';
 
 if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	/**
