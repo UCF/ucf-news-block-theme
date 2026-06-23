@@ -1,28 +1,36 @@
 <?php
-$post_id = $args['postId'] ?? get_the_ID();
-if ( ! $post_id ) return;
+$post_id = $block->context['postId'] ?? get_the_ID();
+
+if ( ! $post_id || ! function_exists( 'get_field' ) ) {
+	return;
+}
 
 $primary_tag = get_field( 'post_primary_tag', $post_id );
 if ( ! $primary_tag ) {
-    $tags        = wp_get_post_tags( $post_id );
-    $primary_tag = $tags[0] ?? null;
+	$tags        = wp_get_post_tags( $post_id );
+	$primary_tag = $tags[0] ?? null;
 }
 
-if ( ! $primary_tag ) return;
+if ( ! ( $primary_tag instanceof WP_Term ) ) {
+	return;
+}
 
 $query = new WP_Query( array(
-    'post_type'      => 'post',
-    'posts_per_page' => 8,
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-    'post__not_in'   => array( $post_id ),
-    'tax_query'      => array(
-        array(
-            'taxonomy' => 'post_tag',
-            'field'    => 'term_id',
-            'terms'    => array( $primary_tag->term_id ),
-        ),
-    ),
+	'post_type'           => 'post',
+	'posts_per_page'      => 8,
+	'orderby'             => 'date',
+	'order'               => 'DESC',
+	'post__not_in'        => array( $post_id ),
+	'ignore_sticky_posts' => true,
+	'no_found_rows'       => true,
+	'tax_query'           => array(
+		array(
+			'taxonomy' => 'post_tag',
+			'field'    => 'term_id',
+			'terms'    => array( (int) $primary_tag->term_id ),
+		),
+	),
+
 ) );
 
 if ( ! $query->have_posts() ) return;
