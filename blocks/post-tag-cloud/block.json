@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "ucf-today/tag-cloud",
+    "title": "Tag Cloud",
+    "category": "text",
+    "description": "Outputs the post's tags as a tag cloud. Renders nothing when the Display Tag Cloud field is disabled or no tags are set.",
+    "textdomain": "ucf-news-block-theme",
+    "keywords": [ "tags", "cloud", "topics" ],
+    "usesContext": [ "postId" ],
+    "supports": {
+        "html": false,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "render": "file:./render.php"
+}
