@@ -59,7 +59,7 @@ if ( ! function_exists( 'ucf_today_get_resource_link_data' ) ) {
 
 		// Resource links point at an external URL; fall back to the permalink
 		// if the meta is somehow empty so the title is never an empty link.
-		$external_url = (string) get_post_meta( $post->ID, 'ucf_resource_link_url', true );
+		$external_url = esc_url_raw( (string) get_post_meta( $post->ID, 'ucf_resource_link_url', true ) );
 		$data['url']  = ( '' !== $external_url ) ? $external_url : (string) get_permalink( $post );
 
 		if ( function_exists( 'get_field' ) ) {
@@ -141,7 +141,7 @@ if ( ! function_exists( 'ucf_today_resource_plugins_installed' ) ) {
 	 * @return bool True if both plugins are active, false otherwise.
 	 */
 	function ucf_today_resource_plugins_installed() {
-		include_once ( ABSPATH . 'wp-admin/includes/plugin.php' );
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		if ( is_plugin_active( 'UCF-Resource-Search-Plugin/ucf-resource-search.php' ) &&
 			 is_plugin_active( 'UCF-Source-Taxonomy-Plugin/ucf-sources-taxonomy.php' ) ) {
