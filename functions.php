@@ -10,6 +10,8 @@ include_once get_template_directory() . '/includes/author-functions.php';
 include_once get_template_directory() . '/includes/header-media-functions.php';
 include_once get_template_directory() . '/includes/highlights-functions.php';
 include_once get_template_directory() . '/includes/story-functions.php';
+include_once get_template_directory() . '/includes/resource-link-functions.php';
+include_once get_template_directory() . '/includes/weather-layouts.php';
 
 if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	/**
@@ -38,6 +40,27 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 			true
 		);
 
+		// Register the Resource Links block's editor script. The handle matches
+		// the `editorScript` value in blocks/resource-links/block.json.
+		$ucf_rl_editor      = '/blocks/resource-links/index.js';
+		$ucf_rl_editor_path = get_template_directory() . $ucf_rl_editor;
+		wp_register_script(
+			'ucf-today-resource-links-editor',
+			get_template_directory_uri() . $ucf_rl_editor,
+			array(
+				'wp-blocks',
+				'wp-block-editor',
+				'wp-components',
+				'wp-data',
+				'wp-element',
+				'wp-html-entities',
+				'wp-i18n',
+				'wp-server-side-render',
+			),
+			file_exists( $ucf_rl_editor_path ) ? (string) filemtime( $ucf_rl_editor_path ) : null,
+			true
+		);
+
 		register_block_type( get_template_directory() . '/blocks/post-category' );
 		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
@@ -46,6 +69,10 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 		register_block_type( get_template_directory() . '/blocks/story' );
 		register_block_type( get_template_directory() . '/blocks/post-tag-cloud' );
 		register_block_type( get_template_directory() . '/blocks/post-related-stories' );
+
+		if ( ucf_today_resource_plugins_installed() ) {
+			register_block_type( get_template_directory() . '/blocks/resource-links' );
+		}
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );
