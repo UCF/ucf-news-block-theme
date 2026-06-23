@@ -35,10 +35,10 @@ if ( ! function_exists( 'ucf_today_weather_default_today_nav' ) ) {
 		ob_start();
 	?>
 		<div class="weather weather-today-nav">
-			<span class="weather-date"><?php echo esc_html( date( 'l, F j, Y' ) ); ?></span>
+			<span class="weather-date"><?php echo esc_html( wp_date( 'l, F j, Y' ) ); ?></span>
 			<span class="weather-status">
 				<span class="wi weather-icon" aria-hidden="true">
-					<?php echo $icon; ?>
+					<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG markup returned by UCF_Weather_Common::get_weather_icon_svg() is expected to be safe. ?>
 				</span>
 				<span class="weather-text">
 					<span class="weather-temp"><?php echo esc_html( $data->temp ); ?>F</span>
