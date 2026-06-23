@@ -1,0 +1,55 @@
+/*
+ * Tag cloud block.
+ *
+ * Structure (see parts/tag-cloud.html or wherever the block lives):
+ *   .today-tag-cloud
+ *     h2                  -> "More Topics" label, small/uppercase
+ *     wp:post-terms       -> renders a flat run of <a> tags, one per term
+ */
+.today-tag-cloud {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+
+  h2 {
+    font-size: .75rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #767676;
+    margin-bottom: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  // wp:post-terms has no class hook of its own — it just outputs <a> tags
+  // (or a bare <span> when a term has no permalink) — so we style the
+  // anchor directly rather than relying on a `.tag-cloud-link` class.
+  a {
+    background: #eee;
+    border: 2px solid #d6d6d6;
+    border-radius: .5rem;
+    color: #5f5f5f;
+    display: inline-block;
+    font-size: 85%;
+    margin-bottom: .5rem;
+    margin-right: .5rem;
+    padding: .3rem .7rem;
+    text-decoration: none;
+    transition: color .2s ease-in-out,
+                background-color .2s ease-in-out,
+                box-shadow .2s ease-in-out;
+
+    // Scoped to this block so it can't collide with the site-wide
+    // `a { color: #0262b6; text-decoration: underline; }` rule, and to
+    // override the site-wide hover/focus underline + blue color.
+    &:active,
+    &:hover,
+    &:focus-visible {
+      background: #d6d6d6;
+      color: #3d3d3d;
+      text-decoration: none;
+    }
+  }
+}
