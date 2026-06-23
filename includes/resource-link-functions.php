@@ -131,3 +131,23 @@ if ( ! function_exists( 'ucf_today_get_latest_resource_links' ) ) {
 		return $query->posts;
 	}
 }
+
+if ( ! function_exists( 'ucf_today_resource_plugins_installed' ) ) {
+	/**
+	 * Checks if the required resource plugins are installed and active.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if both plugins are active, false otherwise.
+	 */
+	function ucf_today_resource_plugins_installed() {
+		include_once ( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		if ( is_plugin_active( 'UCF-Resource-Search-Plugin/ucf-resource-search.php' ) &&
+			 is_plugin_active( 'UCF-Source-Taxonomy-Plugin/ucf-sources-taxonomy.php' ) ) {
+			return true;
+		}
+
+		return false;
+	}
+}

@@ -66,7 +66,10 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 		register_block_type( get_template_directory() . '/blocks/post-header-media' );
 		register_block_type( get_template_directory() . '/blocks/post-highlights' );
 		register_block_type( get_template_directory() . '/blocks/story' );
-		register_block_type( get_template_directory() . '/blocks/resource-links' );
+
+		if ( ucf_today_resource_plugins_installed() ) {
+			register_block_type( get_template_directory() . '/blocks/resource-links' );
+		}
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );
