@@ -1,0 +1,68 @@
+// Resource Links block (see the ucf-today/resource-links block). Lists the
+// latest external news coverage of UCF as a stack of <article>s, each with a
+// linked title, a description, and the source name. Styling mirrors the legacy
+// theme's horizontal "feature" treatment (large title, gray subhead) while
+// using theme.json tokens.
+
+.resource-links {
+  .resource-links__heading {
+		color: var(--wp--preset--color--muted);
+		font-size: 1rem;
+		text-transform: uppercase;
+    margin: 0 0 var(--wp--preset--spacing--medium);
+  }
+
+  .resource-links__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resource-links__item {
+    margin-bottom: var(--wp--preset--spacing--medium);
+  }
+}
+
+.resource-link {
+  .resource-link__title {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 1rem;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .resource-link__description {
+    margin: var(--wp--preset--spacing--small) 0 0;
+    line-height: 1.5;
+  }
+
+  // Source name acts as the subhead, matching the legacy gray treatment.
+  .resource-link__source {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--muted);
+  }
+
+  .resource-link__source-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  .resource-link__source-name {
+    display: block;
+  }
+}

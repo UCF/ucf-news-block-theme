@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/resource-links",
+	"title": "Latest Resource Links",
+	"category": "design",
+	"description": "Displays the most recently published Resource Links (external news sources covering UCF), newest first. Drop it onto the home page to surface “In the News” coverage.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "resource", "links", "news", "external", "sources", "in the news" ],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": "In the News"
+		},
+		"numberOfItems": {
+			"type": "number",
+			"default": 4
+		},
+		"resourceType": {
+			"type": "string",
+			"default": "external-story"
+		},
+		"showDescription": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "ucf-today-resource-links-editor",
+	"render": "file:./render.php"
+}
