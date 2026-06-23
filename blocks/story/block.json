@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/story",
+	"title": "Story",
+	"category": "design",
+	"description": "Displays a post as a story card in one of several layouts (feature, card, card with title only, or inline). Works inside a Query Loop or with a hand-picked post.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "post", "story", "card", "feed", "news" ],
+	"usesContext": [ "postId", "queryId" ],
+	"attributes": {
+		"variant": {
+			"type": "string",
+			"default": "stacked"
+		},
+		"postId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "ucf-today-story-editor",
+	"render": "file:./render.php"
+}
