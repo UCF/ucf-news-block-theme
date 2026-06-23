@@ -44,4 +44,4 @@ if ( ! $query->have_posts() ) return;
         </div>
     </div>
 
-</section>
+</div>
