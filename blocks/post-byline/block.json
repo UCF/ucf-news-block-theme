@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "ucf-today/post-byline",
 	"title": "Post Byline",
-	"category": "text",
+	"category": "widgets",
 	"description": "Outputs the post byline (\"By {author}\"), resolving custom author meta, the assigned Author term, or the original publisher.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "author", "byline", "post" ],

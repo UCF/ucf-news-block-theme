@@ -1,15 +1,35 @@
 <!-- wp:template-part {"slug":"header-post","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
+<!-- wp:group {"tagName":"main"} -->
 <main class="wp-block-group">
 
-	<!-- wp:post-featured-image /-->
+  <!-- wp:group {"tagName":"article"} -->
+  <article class="wp-block-group">
 
-	<!-- wp:ucf-today/post-highlights /-->
+		<!-- wp:group {"tagName":"article", "layout":{"type":"constrained"}} -->
+		<div class="is-layout-constrained">
 
-	<!-- wp:post-content /-->
+			<!-- wp:post-featured-image /-->
 
-	<!-- wp:template-part {"slug":"tag-cloud","tagName":"section"} /-->
+    	<!-- wp:ucf-today/post-highlights /-->
+
+    	<!-- wp:post-content /-->
+
+			<!-- wp:ucf-today/tag-cloud /-->
+
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"tagName":"footer"} -->
+		<footer class="wp-block-group">
+
+		<!-- wp:ucf-today/related-stories {"tagName":"section"} /-->
+
+		</footer>
+		<!-- /wp:group -->
+
+  </article>
+  <!-- /wp:group -->
 
 </main>
 <!-- /wp:group -->
