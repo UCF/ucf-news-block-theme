@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "ucf-today/post-highlights",
 	"title": "Post Highlights",
-	"category": "text",
+	"category": "widgets",
 	"description": "Outputs the post's highlights as a \"Highlights\" heading followed by an unordered list. Renders nothing when no highlights are set.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "highlights", "summary", "post" ],
