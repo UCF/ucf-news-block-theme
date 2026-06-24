@@ -3,26 +3,32 @@
 <!-- wp:group {"tagName":"main"} -->
 <main class="wp-block-group">
 
-  <!-- wp:group {"tagName":"article", "layout":{"type":"constrained"}} -->
+  <!-- wp:group {"tagName":"article"} -->
   <article class="wp-block-group">
 
-    <!-- wp:post-featured-image /-->
+		<!-- wp:group {"tagName":"article", "layout":{"type":"constrained"}} -->
+		<div class="is-layout-constrained">
 
-    <!-- wp:ucf-today/post-highlights /-->
+			<!-- wp:post-featured-image /-->
 
-    <!-- wp:post-content /-->
+    	<!-- wp:ucf-today/post-highlights /-->
 
-	<!-- wp:ucf-today/tag-cloud /-->
+    	<!-- wp:post-content /-->
+
+			<!-- wp:ucf-today/tag-cloud /-->
+
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"tagName":"footer"} -->
+		<footer class="wp-block-group">
+
+		<!-- wp:ucf-today/related-stories {"tagName":"section"} /-->
+
+		</footer>
+		<!-- /wp:group -->
 
   </article>
-  <!-- /wp:group -->
-
-  <!-- wp:group {"tagName":"footer"} -->
-  <footer class="wp-block-group">
-
-	 <!-- wp:ucf-today/related-stories {"tagName":"section"} /-->
-
-  </footer>
   <!-- /wp:group -->
 
 </main>
