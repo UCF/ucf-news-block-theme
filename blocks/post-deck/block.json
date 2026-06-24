@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "ucf-today/post-deck",
 	"title": "Post Deck",
-	"category": "text",
+	"category": "widgets",
 	"description": "Outputs the post's deck (the post_header_deck WYSIWYG field) in a div with the lead text treatment. Renders nothing when no deck is set.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "deck", "subhead", "lead", "post" ],
