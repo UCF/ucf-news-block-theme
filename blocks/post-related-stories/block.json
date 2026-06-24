@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "ucf-today/related-stories",
   "title": "Related Stories",
-  "category": "text",
+  "category": "widgets",
   "description": "Outputs a grid of related stories based on the current post's primary tag. Renders nothing when no tag is set.",
   "textdomain": "ucf-news-block-theme",
   "keywords": [ "related", "stories", "posts" ],

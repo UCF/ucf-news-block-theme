@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "ucf-today/resource-links",
 	"title": "Latest Resource Links",
-	"category": "design",
+	"category": "widgets",
 	"description": "Displays the most recently published Resource Links (external news sources covering UCF), newest first. Drop it onto the home page to surface “In the News” coverage.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "resource", "links", "news", "external", "sources", "in the news" ],

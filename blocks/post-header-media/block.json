@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "ucf-today/post-header-media",
 	"title": "Post Header Media",
-	"category": "media",
+	"category": "widgets",
 	"description": "Outputs the post's header media — either an image (with optional caption) or a video — based on the selected header media type.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [ "image", "video", "header", "media", "post" ],
