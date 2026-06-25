@@ -1,3 +1,6 @@
+// Related Stories layout: separator, heading, and Story Group share the same
+// max-width (see templates/single.html).
+
 .related-stories {
   max-width: 950px;
   margin-left: auto;
@@ -5,43 +8,26 @@
   width: 100%;
   margin-bottom: 3rem;
 
-  hr {
-	border: none;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
-	height: 0;
-  }
-
-  .wp-block-separator {
+  > .wp-block-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    height: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 3rem;
     margin-bottom: 3rem;
   }
 
-  .related-stories__heading,
-  .wp-block-heading {
+  > .wp-block-heading {
     font-family: inherit;
-    font-size: .75rem;
     font-weight: 600;
     line-height: 1.1;
     color: inherit;
-    text-align: center;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
     margin-bottom: 1.5rem;
-    padding-bottom: .5rem;
-	margin-top: 3rem;
-
-    @media (min-width: 768px) {
-      font-size: 1rem;
-    }
-  }
-
-  .related-stories__query {
-    .wp-block-post-template {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--wp--preset--spacing--medium);
-
-      @media (min-width: 992px) {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
+    padding-bottom: 0.5rem;
+    margin-top: 0;
   }
 }

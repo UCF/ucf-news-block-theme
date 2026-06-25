@@ -1,0 +1,34 @@
+// Story Group block (see the ucf-today/story-group block). Renders a grid of
+// ucf-today/story cards with a configurable column count.
+
+.story-group__grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--medium);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 768px) {
+    .story-group--cols-1 & {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .story-group--cols-2 & {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .story-group--cols-3 & {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .story-group--cols-4 & {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .story-group--cols-5 & {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .story-group--cols-6 & {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+}

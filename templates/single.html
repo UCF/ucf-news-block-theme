@@ -11,9 +11,9 @@
 
 			<!-- wp:post-featured-image /-->
 
-    	<!-- wp:ucf-today/post-highlights /-->
+			<!-- wp:ucf-today/post-highlights /-->
 
-    	<!-- wp:post-content /-->
+			<!-- wp:post-content /-->
 
 			<!-- wp:ucf-today/tag-cloud /-->
 
@@ -23,7 +23,21 @@
 		<!-- wp:group {"tagName":"footer"} -->
 		<footer class="wp-block-group">
 
-		<!-- wp:ucf-today/related-stories {"tagName":"section"} /-->
+		<!-- wp:group {"className":"related-stories","tagName":"section"} -->
+		<section class="wp-block-group related-stories">
+
+		<!-- wp:separator {"className":"is-style-wide"} -->
+		<hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
+		<!-- /wp:separator -->
+
+		<!-- wp:heading {"textAlign":"center","level":6} -->
+		<h6 class="wp-block-heading has-text-align-center">Related Stories</h6>
+		<!-- /wp:heading -->
+
+		<!-- wp:ucf-today/story-group {"queryMode":"primary_tag","excludeContextPost":true,"perPage":8,"columns":4,"variant":"stacked-title"} /-->
+
+		</section>
+		<!-- /wp:group -->
 
 		</footer>
 		<!-- /wp:group -->

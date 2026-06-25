@@ -14,8 +14,8 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 	 *
 	 * The excerpt prefers the editorial deck (`post_header_deck` ACF field) and
 	 * falls back to the post's standard excerpt when no deck is set. The
-	 * thumbnail reuses the post's resolved header image (which doubles as the
-	 * list thumbnail per the ACF field instructions).
+	 * thumbnail prefers the header/thumbnail image, then an oEmbed poster for
+	 * video headers, then the post's featured image.
 	 *
 	 * @since 1.0.0
 	 *
@@ -26,6 +26,7 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 	 *     @type string $permalink The post permalink.
 	 *     @type string $excerpt   Deck text, falling back to the post excerpt.
 	 *     @type int    $image_id  Attachment ID for the thumbnail (0 if none).
+	 *     @type string $image_url External thumbnail URL (oEmbed poster).
 	 *     @type string $category  First category name ('' if none).
 	 *     @type string $date_iso  Published date in ISO 8601 (for <time datetime>).
 	 *     @type string $date_label Human-readable published date.
@@ -42,6 +43,7 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 			'permalink'  => '',
 			'excerpt'    => '',
 			'image_id'   => 0,
+			'image_url'  => '',
 			'category'   => '',
 			'date_iso'   => '',
 			'date_label' => '',
@@ -62,13 +64,13 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 		}
 		$data['excerpt'] = ( '' !== $deck ) ? $deck : trim( get_the_excerpt( $post ) );
 
-		// Thumbnail: reuse the resolved header image when available.
-		if ( function_exists( 'ucf_today_get_post_header_media_data' ) ) {
-			$media            = ucf_today_get_post_header_media_data( $post->ID );
-			$data['image_id'] = (int) $media['image_id'];
+		// Thumbnail: header image, video poster, then featured image.
+		if ( function_exists( 'ucf_today_get_post_header_thumbnail_data' ) ) {
+			$thumbnail          = ucf_today_get_post_header_thumbnail_data( $post->ID );
+			$data['image_id']   = (int) $thumbnail['image_id'];
+			$data['image_url']  = (string) $thumbnail['image_url'];
 		}
-		// Fall back to the core featured image if no ACF header image is set.
-		if ( ! $data['image_id'] && has_post_thumbnail( $post->ID ) ) {
+		if ( ! $data['image_id'] && ! $data['image_url'] && has_post_thumbnail( $post->ID ) ) {
 			$data['image_id'] = (int) get_post_thumbnail_id( $post->ID );
 		}
 
@@ -81,5 +83,146 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 		$data['date_label'] = (string) get_the_date( '', $post );
 
 		return $data;
+	}
+}
+
+if ( ! function_exists( 'ucf_today_get_post_primary_tag' ) ) {
+	/**
+	 * Returns the editorial primary tag for a post.
+	 *
+	 * Prefers the ACF `post_primary_tag` field and falls back to the post's
+	 * first assigned tag when no primary tag is set.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Post ID.
+	 * @return WP_Term|null Primary tag term, or null when none is available.
+	 */
+	function ucf_today_get_post_primary_tag( $post_id ) {
+		$post_id = absint( $post_id );
+
+		if ( ! $post_id || 'post' !== get_post_type( $post_id ) ) {
+			return null;
+		}
+
+		$tag = null;
+
+		if ( function_exists( 'get_field' ) ) {
+			$tag = get_field( 'post_primary_tag', $post_id );
+		}
+
+		if ( ! $tag ) {
+			$tags = wp_get_post_tags( $post_id );
+			$tag  = $tags[0] ?? null;
+		}
+
+		return ( $tag instanceof WP_Term ) ? $tag : null;
+	}
+}
+
+if ( ! function_exists( 'ucf_today_get_story_group_query_args' ) ) {
+	/**
+	 * Builds WP_Query arguments for the story-group block.
+	 *
+	 * Query modes:
+	 *   - latest       Most recent posts.
+	 *   - category     Posts in editor-selected categories (`termIds`).
+	 *   - tags         Posts with editor-selected tags (`termIds`).
+	 *   - primary_tag  Posts sharing a post's primary tag (ACF), using
+	 *                  `$context_post_id`.
+	 *
+	 * Filtered modes return null when no terms can be resolved.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $attributes        Story-group block attributes.
+	 * @param int   $context_post_id   Post ID for `primary_tag` mode.
+	 * @return array|null WP_Query arguments, or null when the query cannot run.
+	 */
+	function ucf_today_get_story_group_query_args( $attributes, $context_post_id = 0 ) {
+		$attributes = wp_parse_args(
+			$attributes,
+			array(
+				'queryMode'          => 'latest',
+				'termIds'            => array(),
+				'perPage'            => 4,
+				'orderBy'            => 'date',
+				'order'              => 'desc',
+				'excludeContextPost' => false,
+			)
+		);
+
+		$context_post_id = absint( $context_post_id );
+		$query_mode      = (string) $attributes['queryMode'];
+		$tax_query       = array();
+
+		switch ( $query_mode ) {
+			case 'primary_tag':
+				$tag = ucf_today_get_post_primary_tag( $context_post_id );
+				if ( $tag ) {
+					$tax_query[] = array(
+						'taxonomy' => 'post_tag',
+						'field'    => 'term_id',
+						'terms'    => array( (int) $tag->term_id ),
+					);
+				}
+				break;
+
+			case 'category':
+				$term_ids = array_filter( array_map( 'intval', (array) $attributes['termIds'] ) );
+				if ( ! empty( $term_ids ) ) {
+					$tax_query[] = array(
+						'taxonomy'         => 'category',
+						'field'            => 'term_id',
+						'terms'            => $term_ids,
+						'include_children' => true,
+					);
+				}
+				break;
+
+			case 'tags':
+				$term_ids = array_filter( array_map( 'intval', (array) $attributes['termIds'] ) );
+				if ( ! empty( $term_ids ) ) {
+					$tax_query[] = array(
+						'taxonomy' => 'post_tag',
+						'field'    => 'term_id',
+						'terms'    => $term_ids,
+					);
+				}
+				break;
+
+			case 'latest':
+			default:
+				break;
+		}
+
+		if ( empty( $tax_query ) && in_array( $query_mode, array( 'category', 'tags', 'primary_tag' ), true ) ) {
+			return null;
+		}
+
+		$orderby_whitelist = array( 'date', 'title', 'modified', 'rand' );
+		$order_whitelist   = array( 'ASC', 'DESC' );
+		$orderby           = in_array( $attributes['orderBy'], $orderby_whitelist, true ) ? $attributes['orderBy'] : 'date';
+		$order             = strtoupper( (string) $attributes['order'] );
+		$order             = in_array( $order, $order_whitelist, true ) ? $order : 'DESC';
+
+		$args = array(
+			'post_type'           => 'post',
+			'posts_per_page'      => max( 1, (int) $attributes['perPage'] ),
+			'orderby'             => $orderby,
+			'order'               => $order,
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		);
+
+		if ( ! empty( $attributes['excludeContextPost'] ) && $context_post_id && 'post' === get_post_type( $context_post_id ) ) {
+			$args['post__not_in'] = array( $context_post_id );
+		}
+
+		if ( ! empty( $tax_query ) ) {
+			$args['tax_query'] = $tax_query;
+		}
+
+		return $args;
 	}
 }

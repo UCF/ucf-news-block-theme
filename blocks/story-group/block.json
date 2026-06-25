@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/story-group",
+	"title": "Story Group",
+	"category": "widgets",
+	"description": "Displays a configurable grid of stories filtered by selected categories, tags, or the latest posts.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [
+		"stories",
+		"posts",
+		"grid",
+		"query",
+		"related"
+	],
+	"usesContext": [
+		"postId"
+	],
+	"attributes": {
+		"queryMode": {
+			"type": "string",
+			"default": "latest"
+		},
+		"termIds": {
+			"type": "array",
+			"default": []
+		},
+		"contextPostId": {
+			"type": "number",
+			"default": 0
+		},
+		"excludeContextPost": {
+			"type": "boolean",
+			"default": false
+		},
+		"perPage": {
+			"type": "number",
+			"default": 4
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"variant": {
+			"type": "string",
+			"default": "stacked"
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		}
+	},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "ucf-today-story-group-editor",
+	"render": "file:./render.php"
+}

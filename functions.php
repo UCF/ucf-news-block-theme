@@ -61,14 +61,35 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 			true
 		);
 
+		// Register the Story Group block's editor script. The handle matches
+		// the `editorScript` value in blocks/story-group/block.json.
+		$ucf_sg_editor      = '/blocks/story-group/index.js';
+		$ucf_sg_editor_path = get_template_directory() . $ucf_sg_editor;
+		wp_register_script(
+			'ucf-today-story-group-editor',
+			get_template_directory_uri() . $ucf_sg_editor,
+			array(
+				'wp-blocks',
+				'wp-block-editor',
+				'wp-components',
+				'wp-data',
+				'wp-element',
+				'wp-html-entities',
+				'wp-i18n',
+				'wp-server-side-render',
+			),
+			file_exists( $ucf_sg_editor_path ) ? (string) filemtime( $ucf_sg_editor_path ) : null,
+			true
+		);
+
 		register_block_type( get_template_directory() . '/blocks/post-category' );
 		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
 		register_block_type( get_template_directory() . '/blocks/post-header-media' );
 		register_block_type( get_template_directory() . '/blocks/post-highlights' );
 		register_block_type( get_template_directory() . '/blocks/story' );
+		register_block_type( get_template_directory() . '/blocks/story-group' );
 		register_block_type( get_template_directory() . '/blocks/post-tag-cloud' );
-		register_block_type( get_template_directory() . '/blocks/post-related-stories' );
 
 		if ( ucf_today_resource_plugins_installed() ) {
 			register_block_type( get_template_directory() . '/blocks/resource-links' );
