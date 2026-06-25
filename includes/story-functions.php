@@ -14,8 +14,8 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 	 *
 	 * The excerpt prefers the editorial deck (`post_header_deck` ACF field) and
 	 * falls back to the post's standard excerpt when no deck is set. The
-	 * thumbnail prefers the header/thumbnail image, then an oEmbed poster for
-	 * video headers, then the post's featured image.
+	 * thumbnail prefers the header/thumbnail image field, then the post's
+	 * featured image.
 	 *
 	 * @since 1.0.0
 	 *
@@ -26,7 +26,6 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 	 *     @type string $permalink The post permalink.
 	 *     @type string $excerpt   Deck text, falling back to the post excerpt.
 	 *     @type int    $image_id  Attachment ID for the thumbnail (0 if none).
-	 *     @type string $image_url External thumbnail URL (oEmbed poster).
 	 *     @type string $category  First category name ('' if none).
 	 *     @type string $date_iso  Published date in ISO 8601 (for <time datetime>).
 	 *     @type string $date_label Human-readable published date.
@@ -43,7 +42,6 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 			'permalink'  => '',
 			'excerpt'    => '',
 			'image_id'   => 0,
-			'image_url'  => '',
 			'category'   => '',
 			'date_iso'   => '',
 			'date_label' => '',
@@ -64,13 +62,11 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 		}
 		$data['excerpt'] = ( '' !== $deck ) ? $deck : trim( get_the_excerpt( $post ) );
 
-		// Thumbnail: header image, video poster, then featured image.
 		if ( function_exists( 'ucf_today_get_post_header_thumbnail_data' ) ) {
-			$thumbnail          = ucf_today_get_post_header_thumbnail_data( $post->ID );
-			$data['image_id']   = (int) $thumbnail['image_id'];
-			$data['image_url']  = (string) $thumbnail['image_url'];
+			$thumbnail        = ucf_today_get_post_header_thumbnail_data( $post->ID );
+			$data['image_id'] = (int) $thumbnail['image_id'];
 		}
-		if ( ! $data['image_id'] && ! $data['image_url'] && has_post_thumbnail( $post->ID ) ) {
+		if ( ! $data['image_id'] && has_post_thumbnail( $post->ID ) ) {
 			$data['image_id'] = (int) get_post_thumbnail_id( $post->ID );
 		}
 

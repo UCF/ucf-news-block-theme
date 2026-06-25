@@ -98,12 +98,6 @@ $ucf_story_render_image = static function () use ( $ucf_story, $ucf_story_image_
 				'alt'      => '',
 			)
 		);
-	} elseif ( ! empty( $ucf_story['image_url'] ) ) {
-		$image = sprintf(
-			'<img src="%1$s" alt="" class="story__image" decoding="async" loading="lazy" sizes="%2$s" />',
-			esc_url( $ucf_story['image_url'] ),
-			esc_attr( $ucf_story_image_args['sizes'] )
-		);
 	} else {
 		$is_placeholder = true;
 	}
