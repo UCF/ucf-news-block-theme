@@ -93,13 +93,17 @@
   }
 }
 
-// 4. Inline: small thumbnail (~33%) left, category + title right. Used within
-// story body copy; collapses gracefully but stays side-by-side by default.
+// 4. Inline: thumbnail left + category/title right on desktop; stacks image
+// above text on mobile.
 .story--inline {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 2fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--wp--preset--spacing--medium);
   align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: minmax(0, 1fr) 2fr;
+  }
 
   .story__title {
     font-size: 1rem;

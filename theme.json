@@ -264,7 +264,7 @@
 	},
 	"styles": {
 		"spacing": {
-			"blockGap": "1rem"
+			"blockGap": "var(--wp--preset--spacing--x-large)"
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",

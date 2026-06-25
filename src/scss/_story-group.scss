@@ -3,10 +3,18 @@
 
 .story-group__grid {
   display: grid;
-  gap: var(--wp--preset--spacing--medium);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--x-large);
+  grid-template-columns: minmax(0, 1fr);
+
+  // Card stack spacing (image → title) similar to .mb-3 on the legacy feature cards.
+  .story--stacked,
+  .story--stacked-title {
+    gap: var(--wp--preset--spacing--medium);
+  }
 
   @media (min-width: 768px) {
+    gap: var(--wp--preset--spacing--large);
+
     .story-group--cols-1 & {
       grid-template-columns: minmax(0, 1fr);
     }

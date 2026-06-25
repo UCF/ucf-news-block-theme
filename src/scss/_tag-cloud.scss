@@ -7,8 +7,8 @@
  *     wp:post-terms       -> renders a flat run of <a> tags, one per term
  */
 .today-tag-cloud {
-  margin-top: 3rem;
-  margin-bottom: 3rem !important;
+  margin-top: var(--wp--preset--spacing--x-large);
+  margin-bottom: var(--wp--preset--spacing--x-large) !important;
 
 
   h2 {
