@@ -32,38 +32,4 @@
       font-size: 1rem;
     }
   }
-
-  .related-stories-query {
-    // Let core post-template grid layout own column tracks; only normalize
-    // list items so long titles/images cannot blow out column widths.
-    .wp-block-post-template {
-      gap: var(--wp--preset--spacing--medium);
-
-      > .wp-block-post {
-        min-width: 0;
-        margin: 0;
-      }
-    }
-
-    .story {
-      min-width: 0;
-      height: 100%;
-    }
-
-    .story--stacked-title {
-      .story__media {
-        aspect-ratio: 3 / 2;
-        overflow: hidden;
-      }
-
-      .story__image {
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .story__title {
-        overflow-wrap: anywhere;
-      }
-    }
-  }
 }
