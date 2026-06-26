@@ -1,0 +1,76 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1140px"}} -->
+<main class="wp-block-group">
+
+	<!-- wp:query-title {"type":"archive","showPrefix":false} /-->
+
+	<!-- wp:columns {"className":"tag-layout","style":{"spacing":{"blockGap":"var:preset|spacing|xx-large"}}} -->
+	<div class="wp-block-columns tag-layout" style="gap:var(--wp--preset--spacing--xx-large)">
+
+		<!-- wp:column {"width":"66.66%","className":"tag-layout__main","style":{"spacing":{"blockGap":"var:preset|spacing|x-large"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-column tag-layout__main" style="flex-basis:66.66%">
+
+			<!--
+				NOTE: These two Query Loops use a custom query (inherit:false) so the
+				lead story and the 9-up grid can be split via perPage/offset. A custom
+				query does NOT auto-filter to the current tag term — it is scoped via
+				the ucf_today_scope_archive_query_loops() filter in functions.php, which
+				targets these loops by their `namespace` attribute. Switch to
+				inherit:true to scope to the archive at the cost of the 1 + 9 split.
+			-->
+
+			<!-- wp:query {"queryId":1,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false},"namespace":"ucf-today/archive-lead","className":"tag-lead"} -->
+			<div class="wp-block-query tag-lead">
+				<!-- wp:post-template -->
+					<!-- wp:ucf-today/story {"variant":"stacked"} /-->
+				<!-- /wp:post-template -->
+			</div>
+			<!-- /wp:query -->
+
+			<!-- wp:query {"queryId":2,"query":{"perPage":9,"pages":0,"offset":1,"postType":"post","order":"desc","orderBy":"date","inherit":false},"namespace":"ucf-today/archive-grid","className":"tag-grid"} -->
+			<div class="wp-block-query tag-grid">
+				<!-- wp:post-template {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|x-large","left":"var:preset|spacing|large"}}},"layout":{"type":"grid","columnCount":3}} -->
+					<!-- wp:ucf-today/story {"variant":"stacked"} /-->
+				<!-- /wp:post-template -->
+
+				<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+					<!-- wp:query-pagination-previous /-->
+					<!-- wp:query-pagination-numbers /-->
+					<!-- wp:query-pagination-next /-->
+				<!-- /wp:query-pagination -->
+
+				<!-- wp:query-no-results -->
+					<!-- wp:paragraph -->
+					<p>No stories were found.</p>
+					<!-- /wp:paragraph -->
+				<!-- /wp:query-no-results -->
+			</div>
+			<!-- /wp:query -->
+
+		</div>
+		<!-- /wp:column -->
+
+		<!-- wp:column {"width":"33.33%","className":"tag-layout__sidebar"} -->
+		<div class="wp-block-column tag-layout__sidebar" style="flex-basis:33.33%">
+
+			<!-- wp:ucf-today/resource-links {"showDescription":false} /-->
+
+			<!-- wp:group {"className":"resources-menu","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group resources-menu">
+				<!-- wp:heading {"level":2,"className":"resources-menu__heading"} -->
+				<h2 class="resources-menu__heading">Resources</h2>
+				<!-- /wp:heading -->
+			</div>
+			<!-- /wp:group -->
+
+		</div>
+		<!-- /wp:column -->
+
+	</div>
+	<!-- /wp:columns -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
