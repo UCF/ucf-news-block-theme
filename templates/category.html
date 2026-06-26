@@ -14,13 +14,13 @@
 			<!--
 				NOTE: These two Query Loops use a custom query (inherit:false) so the
 				lead story and the 9-up grid can be split via perPage/offset. A custom
-				query does NOT auto-filter to the current category term — wire that up
-				(e.g. via a pre_get_posts / query-vars filter) if category scoping is
-				required. Switch to inherit:true to scope to the archive at the cost of
-				the 1 + 9 split.
+				query does NOT auto-filter to the current category term — it is scoped
+				via the ucf_today_scope_archive_query_loops() filter in functions.php,
+				which targets these loops by their `namespace` attribute. Switch to
+				inherit:true to scope to the archive at the cost of the 1 + 9 split.
 			-->
 
-			<!-- wp:query {"queryId":1,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false},"className":"category-lead"} -->
+			<!-- wp:query {"queryId":1,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false},"namespace":"ucf-today/archive-lead","className":"category-lead"} -->
 			<div class="wp-block-query category-lead">
 				<!-- wp:post-template -->
 					<!-- wp:ucf-today/story {"variant":"stacked"} /-->
@@ -28,7 +28,7 @@
 			</div>
 			<!-- /wp:query -->
 
-			<!-- wp:query {"queryId":2,"query":{"perPage":9,"pages":0,"offset":1,"postType":"post","order":"desc","orderBy":"date","inherit":false},"className":"category-grid"} -->
+			<!-- wp:query {"queryId":2,"query":{"perPage":9,"pages":0,"offset":1,"postType":"post","order":"desc","orderBy":"date","inherit":false},"namespace":"ucf-today/archive-grid","className":"category-grid"} -->
 			<div class="wp-block-query category-grid">
 				<!-- wp:post-template {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|x-large","left":"var:preset|spacing|large"}}},"layout":{"type":"grid","columnCount":3}} -->
 					<!-- wp:ucf-today/story {"variant":"stacked"} /-->

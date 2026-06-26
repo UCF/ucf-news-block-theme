@@ -187,17 +187,19 @@ if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
 	 * The archive templates split posts into a lead story and a 9-up grid, which
 	 * requires custom queries (perPage/offset). A custom Query Loop does not
 	 * inherit the archive term, so without this filter it returns all posts.
-	 * We target only our loops (queryId 1 and 2) and inject the queried term so
-	 * the lead/grid split is preserved while staying scoped to the archive.
+	 * We target only our loops by their custom `namespace` attribute (set in the
+	 * category/tag templates) — `queryId` is only unique per editing context and
+	 * could collide with other loops — and inject the queried term so the
+	 * lead/grid split is preserved while staying scoped to the archive.
 	 *
 	 * @param array    $query Arguments for WP_Query, as built from the block.
 	 * @param WP_Block $block The block instance.
 	 * @return array Filtered query args.
 	 */
 	function ucf_today_scope_archive_query_loops( $query, $block ) {
-		$query_id = $block->context['queryId'] ?? ( $block->attributes['queryId'] ?? null );
+		$namespace = $block->attributes['namespace'] ?? '';
 
-		if ( ! in_array( $query_id, array( 1, 2 ), true ) ) {
+		if ( ! in_array( $namespace, array( 'ucf-today/archive-lead', 'ucf-today/archive-grid' ), true ) ) {
 			return $query;
 		}
 
