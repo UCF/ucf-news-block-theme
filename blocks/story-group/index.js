@@ -18,7 +18,7 @@
 		{ label: __( 'Latest posts', 'ucf-news-block-theme' ), value: 'latest' },
 		{ label: __( 'Categories', 'ucf-news-block-theme' ), value: 'category' },
 		{ label: __( 'Tags', 'ucf-news-block-theme' ), value: 'tags' },
-		{ label: __( 'Primary tag (current post)', 'ucf-news-block-theme' ), value: 'primary_tag' },
+		{ label: __( 'Primary tag (current post, falls back to other tags, then latest)', 'ucf-news-block-theme' ), value: 'primary_tag' },
 	];
 
 	const TAXONOMY_BY_MODE = {

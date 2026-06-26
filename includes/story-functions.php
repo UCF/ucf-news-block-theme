@@ -86,8 +86,9 @@ if ( ! function_exists( 'ucf_today_get_post_primary_tag' ) ) {
 	/**
 	 * Returns the editorial primary tag for a post.
 	 *
-	 * Prefers the ACF `post_primary_tag` field and falls back to the post's
-	 * first assigned tag when no primary tag is set.
+	 * Prefers the ACF `post_primary_tag` field. Does not fall back to other
+	 * assigned tags; broader related-story matching is handled by the
+	 * story-group block's `primary_tag` query cascade.
 	 *
 	 * @since 1.0.0
 	 *
@@ -107,12 +108,128 @@ if ( ! function_exists( 'ucf_today_get_post_primary_tag' ) ) {
 			$tag = get_field( 'post_primary_tag', $post_id );
 		}
 
-		if ( ! $tag ) {
-			$tags = wp_get_post_tags( $post_id );
-			$tag  = $tags[0] ?? null;
+		return ( $tag instanceof WP_Term ) ? $tag : null;
+	}
+}
+
+if ( ! function_exists( 'ucf_today_get_story_group_primary_tag_fallback_sets' ) ) {
+	/**
+	 * Returns tag ID sets to try for related stories, in priority order.
+	 *
+	 * 1. The editorial primary tag (ACF), when set.
+	 * 2. All other tags assigned to the post. When no primary tag is set,
+	 *    all assigned tags are used in a single query.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Post ID.
+	 * @return int[][] Ordered tag ID sets for successive queries.
+	 */
+	function ucf_today_get_story_group_primary_tag_fallback_sets( $post_id ) {
+		$post_id = absint( $post_id );
+
+		if ( ! $post_id || 'post' !== get_post_type( $post_id ) ) {
+			return array();
 		}
 
-		return ( $tag instanceof WP_Term ) ? $tag : null;
+		$sets       = array();
+		$primary_id = 0;
+
+		if ( function_exists( 'get_field' ) ) {
+			$primary = get_field( 'post_primary_tag', $post_id );
+			if ( $primary instanceof WP_Term ) {
+				$primary_id = (int) $primary->term_id;
+				$sets[]     = array( $primary_id );
+			}
+		}
+
+		$all_tag_ids = wp_get_post_tags( $post_id, array( 'fields' => 'ids' ) );
+		$all_tag_ids = array_values( array_filter( array_map( 'intval', (array) $all_tag_ids ) ) );
+
+		if ( empty( $all_tag_ids ) ) {
+			return $sets;
+		}
+
+		$other_tag_ids = $primary_id
+			? array_values( array_diff( $all_tag_ids, array( $primary_id ) ) )
+			: $all_tag_ids;
+
+		if ( ! empty( $other_tag_ids ) && ( empty( $sets ) || $other_tag_ids !== $sets[0] ) ) {
+			$sets[] = $other_tag_ids;
+		}
+
+		return $sets;
+	}
+}
+
+if ( ! function_exists( 'ucf_today_query_story_group_posts' ) ) {
+	/**
+	 * Runs the story-group query, with fallbacks for `primary_tag` mode.
+	 *
+	 * Tries, in order: primary tag, other tags, the post's categories, then
+	 * the latest posts when no tag matches are available.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $attributes      Story-group block attributes.
+	 * @param int   $context_post_id Post ID for context-driven modes.
+	 * @return WP_Query|null Query with results, or null when nothing matches.
+	 */
+	function ucf_today_query_story_group_posts( $attributes, $context_post_id = 0 ) {
+		$query_mode = (string) ( $attributes['queryMode'] ?? 'latest' );
+
+		if ( 'primary_tag' !== $query_mode ) {
+			$args = ucf_today_get_story_group_query_args( $attributes, $context_post_id );
+			if ( ! $args ) {
+				return null;
+			}
+
+			$query = new WP_Query( $args );
+			return $query->have_posts() ? $query : null;
+		}
+
+		$tag_sets = ucf_today_get_story_group_primary_tag_fallback_sets( $context_post_id );
+
+		foreach ( $tag_sets as $tag_ids ) {
+			$args = ucf_today_get_story_group_query_args( $attributes, $context_post_id, $tag_ids );
+			if ( ! $args ) {
+				continue;
+			}
+
+			$query = new WP_Query( $args );
+			if ( $query->have_posts() ) {
+				return $query;
+			}
+		}
+
+		$categories = get_the_category( $context_post_id );
+		if ( ! empty( $categories ) ) {
+			$args = ucf_today_get_story_group_query_args(
+				$attributes,
+				$context_post_id,
+				null,
+				array_map( 'intval', wp_list_pluck( $categories, 'term_id' ) )
+			);
+
+			if ( $args ) {
+				$query = new WP_Query( $args );
+				if ( $query->have_posts() ) {
+					return $query;
+				}
+			}
+		}
+
+		$latest_args = ucf_today_get_story_group_query_args(
+			array_merge( $attributes, array( 'queryMode' => 'latest' ) ),
+			$context_post_id
+		);
+
+		if ( ! $latest_args ) {
+			return null;
+		}
+
+		$query = new WP_Query( $latest_args );
+		return $query->have_posts() ? $query : null;
 	}
 }
 
@@ -124,18 +241,22 @@ if ( ! function_exists( 'ucf_today_get_story_group_query_args' ) ) {
 	 *   - latest       Most recent posts.
 	 *   - category     Posts in editor-selected categories (`termIds`).
 	 *   - tags         Posts with editor-selected tags (`termIds`).
-	 *   - primary_tag  Posts sharing a post's primary tag (ACF), using
-	 *                  `$context_post_id`.
+	 *   - primary_tag  Posts sharing the context post's primary tag (ACF), then
+	 *                  any of its other tags, then its categories, then the
+	 *                  latest posts when no tag matches are available. Use
+	 *                  `ucf_today_query_story_group_posts()` to run the full cascade.
 	 *
 	 * Filtered modes return null when no terms can be resolved.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $attributes        Story-group block attributes.
-	 * @param int   $context_post_id   Post ID for `primary_tag` mode.
+	 * @param array      $attributes        Story-group block attributes.
+	 * @param int        $context_post_id   Post ID for `primary_tag` mode.
+	 * @param int[]|null $tag_ids           Optional tag IDs for `primary_tag` mode.
+	 * @param int[]|null $category_ids      Optional category IDs for `primary_tag` mode.
 	 * @return array|null WP_Query arguments, or null when the query cannot run.
 	 */
-	function ucf_today_get_story_group_query_args( $attributes, $context_post_id = 0 ) {
+	function ucf_today_get_story_group_query_args( $attributes, $context_post_id = 0, $tag_ids = null, $category_ids = null ) {
 		$attributes = wp_parse_args(
 			$attributes,
 			array(
@@ -154,13 +275,38 @@ if ( ! function_exists( 'ucf_today_get_story_group_query_args' ) ) {
 
 		switch ( $query_mode ) {
 			case 'primary_tag':
-				$tag = ucf_today_get_post_primary_tag( $context_post_id );
-				if ( $tag ) {
-					$tax_query[] = array(
-						'taxonomy' => 'post_tag',
-						'field'    => 'term_id',
-						'terms'    => array( (int) $tag->term_id ),
-					);
+				if ( null !== $category_ids ) {
+					$term_ids = array_values( array_filter( array_map( 'intval', (array) $category_ids ) ) );
+					if ( ! empty( $term_ids ) ) {
+						$tax_query[] = array(
+							'taxonomy'         => 'category',
+							'field'            => 'term_id',
+							'terms'            => $term_ids,
+							'include_children' => true,
+							'operator'         => 'IN',
+						);
+					}
+				} elseif ( null !== $tag_ids ) {
+					$term_ids = array_values( array_filter( array_map( 'intval', (array) $tag_ids ) ) );
+					if ( ! empty( $term_ids ) ) {
+						$tax_query[] = array(
+							'taxonomy' => 'post_tag',
+							'field'    => 'term_id',
+							'terms'    => $term_ids,
+							'operator' => 'IN',
+						);
+					}
+				} else {
+					$tag      = ucf_today_get_post_primary_tag( $context_post_id );
+					$term_ids = $tag ? array( (int) $tag->term_id ) : array();
+					if ( ! empty( $term_ids ) ) {
+						$tax_query[] = array(
+							'taxonomy' => 'post_tag',
+							'field'    => 'term_id',
+							'terms'    => $term_ids,
+							'operator' => 'IN',
+						);
+					}
 				}
 				break;
 

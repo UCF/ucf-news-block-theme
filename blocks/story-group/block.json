@@ -4,7 +4,7 @@
 	"name": "ucf-today/story-group",
 	"title": "Story Group",
 	"category": "widgets",
-	"description": "Displays a configurable grid of stories filtered by selected categories, tags, or the latest posts.",
+	"description": "Displays a configurable grid of stories filtered by selected categories, tags, the current post's primary tag, or the latest posts.",
 	"textdomain": "ucf-news-block-theme",
 	"keywords": [
 		"stories",

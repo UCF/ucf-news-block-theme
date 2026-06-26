@@ -11,7 +11,7 @@
  * @var WP_Block $block      Block instance.
  */
 
-if ( ! function_exists( 'ucf_today_get_story_group_query_args' ) ) {
+if ( ! function_exists( 'ucf_today_query_story_group_posts' ) ) {
 	return;
 }
 
@@ -21,19 +21,17 @@ if ( ! $ucf_story_group_context_post_id ) {
 	$ucf_story_group_context_post_id = absint( $block->context['postId'] ?? 0 );
 }
 
+if ( ! $ucf_story_group_context_post_id ) {
+	$ucf_story_group_context_post_id = absint( get_the_ID() );
+}
+
 if ( ! $ucf_story_group_context_post_id && defined( 'REST_REQUEST' ) && REST_REQUEST && ! empty( $_GET['post_id'] ) && current_user_can( 'edit_posts' ) ) {
 	$ucf_story_group_context_post_id = absint( wp_unslash( $_GET['post_id'] ) );
 }
 
-$ucf_story_group_args = ucf_today_get_story_group_query_args( $attributes, $ucf_story_group_context_post_id );
+$ucf_story_group_query = ucf_today_query_story_group_posts( $attributes, $ucf_story_group_context_post_id );
 
-if ( ! $ucf_story_group_args ) {
-	return;
-}
-
-$ucf_story_group_query = new WP_Query( $ucf_story_group_args );
-
-if ( ! $ucf_story_group_query->have_posts() ) {
+if ( ! $ucf_story_group_query ) {
 	return;
 }
 
