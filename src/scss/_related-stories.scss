@@ -33,14 +33,36 @@
     }
   }
 
-  .related-stories__query {
+  .related-stories-query {
+    // Let core post-template grid layout own column tracks; only normalize
+    // list items so long titles/images cannot blow out column widths.
     .wp-block-post-template {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
       gap: var(--wp--preset--spacing--medium);
 
-      @media (min-width: 992px) {
-        grid-template-columns: repeat(4, 1fr);
+      > .wp-block-post {
+        min-width: 0;
+        margin: 0;
+      }
+    }
+
+    .story {
+      min-width: 0;
+      height: 100%;
+    }
+
+    .story--stacked-title {
+      .story__media {
+        aspect-ratio: 3 / 2;
+        overflow: hidden;
+      }
+
+      .story__image {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .story__title {
+        overflow-wrap: anywhere;
       }
     }
   }

@@ -10,6 +10,7 @@ include_once get_template_directory() . '/includes/author-functions.php';
 include_once get_template_directory() . '/includes/header-media-functions.php';
 include_once get_template_directory() . '/includes/highlights-functions.php';
 include_once get_template_directory() . '/includes/story-functions.php';
+include_once get_template_directory() . '/includes/related-stories-functions.php';
 include_once get_template_directory() . '/includes/resource-link-functions.php';
 include_once get_template_directory() . '/includes/weather-layouts.php';
 
@@ -68,7 +69,6 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 		register_block_type( get_template_directory() . '/blocks/post-highlights' );
 		register_block_type( get_template_directory() . '/blocks/story' );
 		register_block_type( get_template_directory() . '/blocks/post-tag-cloud' );
-		register_block_type( get_template_directory() . '/blocks/post-related-stories' );
 
 		if ( ucf_today_resource_plugins_installed() ) {
 			register_block_type( get_template_directory() . '/blocks/resource-links' );
