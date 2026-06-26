@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ucf-today/resource-link-description",
+	"title": "Resource Link Description",
+	"category": "widgets",
+	"description": "Outputs a Resource Link's description (ucf_resource_link_description) as a paragraph. Use inside a Query Loop of Resource Links.",
+	"textdomain": "ucf-news-block-theme",
+	"keywords": [ "resource", "link", "description", "news", "excerpt" ],
+	"usesContext": [ "postId" ],
+	"editorScript": "ucf-today-resource-link-description-editor",
+	"supports": {
+		"html": false,
+		"color": {
+			"text": true,
+			"background": false,
+			"link": false
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontWeight": true,
+			"__experimentalTextTransform": true,
+			"__experimentalLetterSpacing": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"render": "file:./render.php"
+}

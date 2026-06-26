@@ -62,6 +62,33 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 			true
 		);
 
+		// Register the editor scripts for the per-item Resource Link blocks used
+		// inside a Query Loop (title / source / description). Each handle matches
+		// the `editorScript` value in its block.json; all share the same
+		// dependencies and render a ServerSideRender preview.
+		$ucf_rl_field_blocks = array(
+			'ucf-today-resource-link-title-editor'       => '/blocks/resource-link-title/index.js',
+			'ucf-today-resource-link-source-editor'      => '/blocks/resource-link-source/index.js',
+			'ucf-today-resource-link-description-editor' => '/blocks/resource-link-description/index.js',
+		);
+		foreach ( $ucf_rl_field_blocks as $ucf_rl_field_handle => $ucf_rl_field_src ) {
+			$ucf_rl_field_path = get_template_directory() . $ucf_rl_field_src;
+			wp_register_script(
+				$ucf_rl_field_handle,
+				get_template_directory_uri() . $ucf_rl_field_src,
+				array(
+					'wp-blocks',
+					'wp-block-editor',
+					'wp-components',
+					'wp-element',
+					'wp-i18n',
+					'wp-server-side-render',
+				),
+				file_exists( $ucf_rl_field_path ) ? (string) filemtime( $ucf_rl_field_path ) : null,
+				true
+			);
+		}
+
 		register_block_type( get_template_directory() . '/blocks/post-category' );
 		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
@@ -72,10 +99,50 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 
 		if ( ucf_today_resource_plugins_installed() ) {
 			register_block_type( get_template_directory() . '/blocks/resource-links' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-title' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-source' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-description' );
 		}
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );
+
+
+if ( ! function_exists( 'ucf_today_enable_resource_link_rest' ) ) {
+	/**
+	 * Exposes the `ucf_resource_link` post type to the REST API.
+	 *
+	 * The post type is registered by the UCF Resource Search plugin. Rather than
+	 * patch the plugin, the theme opts it into REST here so it appears in the
+	 * core Query Loop's post-type picker and can be queried by the editor — a
+	 * requirement for the "In the News" archive built from Resource Link blocks.
+	 *
+	 * Filters `register_post_type_args`, which runs for every post type as it is
+	 * registered, so this must short-circuit for everything else.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  $args      Arguments passed to register_post_type().
+	 * @param string $post_type Post type key being registered.
+	 * @return array Possibly-modified arguments.
+	 */
+	function ucf_today_enable_resource_link_rest( $args, $post_type ) {
+		if ( 'ucf_resource_link' !== $post_type ) {
+			return $args;
+		}
+
+		$args['show_in_rest'] = true;
+
+		// Provide a stable REST base only if the plugin hasn't set one, so we
+		// don't override an intentional value upstream.
+		if ( empty( $args['rest_base'] ) ) {
+			$args['rest_base'] = 'resource-links';
+		}
+
+		return $args;
+	}
+}
+add_filter( 'register_post_type_args', 'ucf_today_enable_resource_link_rest', 10, 2 );
 
 
 if ( ! function_exists( 'ucf_today_block_theme_setup' ) ) {
@@ -111,3 +178,43 @@ if ( ! function_exists( 'ucf_today_block_theme_enqueue_assets' ) ) {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ucf_today_block_theme_enqueue_assets' );
+
+if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
+	/**
+	 * Scopes the custom Query Loops in the category/tag archive templates to the
+	 * current term.
+	 *
+	 * The archive templates split posts into a lead story and a 9-up grid, which
+	 * requires custom queries (perPage/offset). A custom Query Loop does not
+	 * inherit the archive term, so without this filter it returns all posts.
+	 * We target only our loops by their custom `namespace` attribute (set in the
+	 * category/tag templates) — `queryId` is only unique per editing context and
+	 * could collide with other loops — and inject the queried term so the
+	 * lead/grid split is preserved while staying scoped to the archive.
+	 *
+	 * @param array    $query Arguments for WP_Query, as built from the block.
+	 * @param WP_Block $block The block instance.
+	 * @return array Filtered query args.
+	 */
+	function ucf_today_scope_archive_query_loops( $query, $block ) {
+		$namespace = $block->attributes['namespace'] ?? '';
+
+		if ( ! in_array( $namespace, array( 'ucf-today/archive-lead', 'ucf-today/archive-grid' ), true ) ) {
+			return $query;
+		}
+
+		$term = get_queried_object();
+		if ( ! $term instanceof WP_Term ) {
+			return $query;
+		}
+
+		if ( is_category() ) {
+			$query['cat'] = $term->term_id;
+		} elseif ( is_tag() ) {
+			$query['tag_id'] = $term->term_id;
+		}
+
+		return $query;
+	}
+}
+add_filter( 'query_loop_block_query_vars', 'ucf_today_scope_archive_query_loops', 10, 2 );
