@@ -61,6 +61,33 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 			true
 		);
 
+		// Register the editor scripts for the per-item Resource Link blocks used
+		// inside a Query Loop (title / source / description). Each handle matches
+		// the `editorScript` value in its block.json; all share the same
+		// dependencies and render a ServerSideRender preview.
+		$ucf_rl_field_blocks = array(
+			'ucf-today-resource-link-title-editor'       => '/blocks/resource-link-title/index.js',
+			'ucf-today-resource-link-source-editor'      => '/blocks/resource-link-source/index.js',
+			'ucf-today-resource-link-description-editor' => '/blocks/resource-link-description/index.js',
+		);
+		foreach ( $ucf_rl_field_blocks as $ucf_rl_field_handle => $ucf_rl_field_src ) {
+			$ucf_rl_field_path = get_template_directory() . $ucf_rl_field_src;
+			wp_register_script(
+				$ucf_rl_field_handle,
+				get_template_directory_uri() . $ucf_rl_field_src,
+				array(
+					'wp-blocks',
+					'wp-block-editor',
+					'wp-components',
+					'wp-element',
+					'wp-i18n',
+					'wp-server-side-render',
+				),
+				file_exists( $ucf_rl_field_path ) ? (string) filemtime( $ucf_rl_field_path ) : null,
+				true
+			);
+		}
+
 		register_block_type( get_template_directory() . '/blocks/post-category' );
 		register_block_type( get_template_directory() . '/blocks/post-deck' );
 		register_block_type( get_template_directory() . '/blocks/post-byline' );
@@ -72,10 +99,50 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 
 		if ( ucf_today_resource_plugins_installed() ) {
 			register_block_type( get_template_directory() . '/blocks/resource-links' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-title' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-source' );
+			register_block_type( get_template_directory() . '/blocks/resource-link-description' );
 		}
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );
+
+
+if ( ! function_exists( 'ucf_today_enable_resource_link_rest' ) ) {
+	/**
+	 * Exposes the `ucf_resource_link` post type to the REST API.
+	 *
+	 * The post type is registered by the UCF Resource Search plugin. Rather than
+	 * patch the plugin, the theme opts it into REST here so it appears in the
+	 * core Query Loop's post-type picker and can be queried by the editor — a
+	 * requirement for the "In the News" archive built from Resource Link blocks.
+	 *
+	 * Filters `register_post_type_args`, which runs for every post type as it is
+	 * registered, so this must short-circuit for everything else.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  $args      Arguments passed to register_post_type().
+	 * @param string $post_type Post type key being registered.
+	 * @return array Possibly-modified arguments.
+	 */
+	function ucf_today_enable_resource_link_rest( $args, $post_type ) {
+		if ( 'ucf_resource_link' !== $post_type ) {
+			return $args;
+		}
+
+		$args['show_in_rest'] = true;
+
+		// Provide a stable REST base only if the plugin hasn't set one, so we
+		// don't override an intentional value upstream.
+		if ( empty( $args['rest_base'] ) ) {
+			$args['rest_base'] = 'resource-links';
+		}
+
+		return $args;
+	}
+}
+add_filter( 'register_post_type_args', 'ucf_today_enable_resource_link_rest', 10, 2 );
 
 
 if ( ! function_exists( 'ucf_today_block_theme_setup' ) ) {
