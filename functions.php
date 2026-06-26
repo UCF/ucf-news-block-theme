@@ -14,6 +14,37 @@ include_once get_template_directory() . '/includes/related-stories-functions.php
 include_once get_template_directory() . '/includes/resource-link-functions.php';
 include_once get_template_directory() . '/includes/weather-layouts.php';
 
+if ( ! function_exists( 'ucf_today_sync_theme_pattern_cache' ) ) {
+	/**
+	 * Clears stale theme pattern cache when new pattern files are added.
+	 *
+	 * WordPress caches `./patterns/` metadata in a site transient keyed by theme
+	 * version. Adding a pattern without bumping the version leaves the registry
+	 * out of date, so `core/pattern` blocks render nothing.
+	 */
+	function ucf_today_sync_theme_pattern_cache() {
+		$theme = wp_get_theme();
+
+		if ( ! $theme->exists() ) {
+			return;
+		}
+
+		$patterns_dir = $theme->get_stylesheet_directory() . '/patterns';
+
+		if ( ! is_dir( $patterns_dir ) ) {
+			return;
+		}
+
+		$file_count     = count( (array) glob( $patterns_dir . '/*.php' ) );
+		$cached_patterns = $theme->get_block_patterns();
+
+		if ( $file_count !== count( $cached_patterns ) ) {
+			$theme->delete_pattern_cache();
+		}
+	}
+}
+add_action( 'after_setup_theme', 'ucf_today_sync_theme_pattern_cache', 0 );
+
 if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	/**
 	 * Registers the theme's custom blocks from their block.json metadata.

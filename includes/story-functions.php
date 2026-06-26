@@ -14,8 +14,9 @@ if ( ! function_exists( 'ucf_today_get_story_data' ) ) {
 	 *
 	 * The excerpt prefers the editorial deck (`post_header_deck` ACF field) and
 	 * falls back to the post's standard excerpt when no deck is set. The
-	 * thumbnail reuses the post's resolved header image (which doubles as the
-	 * list thumbnail per the ACF field instructions).
+	 * thumbnail reuses the `post_header_image` ACF field via the header media
+	 * helper — including when the header is a video — then the featured image.
+	 * The Story block renders a blank placeholder when neither is available.
 	 *
 	 * @since 1.0.0
 	 *

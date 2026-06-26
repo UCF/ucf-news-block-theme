@@ -91,6 +91,36 @@
 		"typography": {
 			"fontSizes": [
 				{
+					"slug": "heading-1",
+					"name": "H1",
+					"size": "clamp(2rem, 4vw, 2.5rem)"
+				},
+				{
+					"slug": "heading-2",
+					"name": "H2",
+					"size": "clamp(1.7rem, 3.5vw, 2rem)"
+				},
+				{
+					"slug": "heading-3",
+					"name": "H3",
+					"size": "clamp(1.45rem, 3vw, 1.75rem)"
+				},
+				{
+					"slug": "heading-4",
+					"name": "H4",
+					"size": "clamp(1.2rem, 2.5vw, 1.5rem)"
+				},
+				{
+					"slug": "heading-5",
+					"name": "H5",
+					"size": "clamp(1rem, 2vw, 1.25rem)"
+				},
+				{
+					"slug": "heading-6",
+					"name": "H6",
+					"size": "clamp(0.75rem, 1.5vw, 1rem)"
+				},
+				{
 					"slug": "small",
 					"name": "Small",
 					"size": "0.875rem"

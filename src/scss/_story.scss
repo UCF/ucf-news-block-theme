@@ -14,6 +14,11 @@
     display: block;
   }
 
+  .story__media--placeholder {
+    aspect-ratio: 3 / 2;
+    background-color: var(--wp--preset--color--faded);
+  }
+
   // Title: the only linked element. Inherits heading fonts from theme.json.
   .story__title {
     margin: 0;

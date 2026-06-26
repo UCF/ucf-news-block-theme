@@ -79,32 +79,33 @@ $ucf_story_wrapper = get_block_wrapper_attributes(
 );
 
 /**
- * Renders the story thumbnail as a linked figure, or nothing when no image.
+ * Renders the story thumbnail, or the theme placeholder when no image is set.
  */
 $ucf_story_render_image = static function () use ( $ucf_story, $ucf_story_image_args ) {
-	if ( ! $ucf_story['image_id'] ) {
-		return;
+	$ucf_story_image_markup = '';
+
+	if ( $ucf_story['image_id'] ) {
+		$ucf_story_image_markup = wp_get_attachment_image(
+			$ucf_story['image_id'],
+			$ucf_story_image_args['size'],
+			false,
+			array(
+				'class'    => 'story__image',
+				'decoding' => 'async',
+				'loading'  => 'lazy',
+				'sizes'    => $ucf_story_image_args['sizes'],
+				'alt'      => '',
+			)
+		);
 	}
 
-	$image = wp_get_attachment_image(
-		$ucf_story['image_id'],
-		$ucf_story_image_args['size'],
-		false,
-		array(
-			'class'    => 'story__image',
-			'decoding' => 'async',
-			'loading'  => 'lazy',
-			'sizes'    => $ucf_story_image_args['sizes'],
-			'alt'      => '',
-		)
-	);
-
-	if ( ! $image ) {
-		return;
-	}
+	$ucf_story_use_placeholder = ( '' === $ucf_story_image_markup );
+	$ucf_story_media_classes   = 'story__media' . ( $ucf_story_use_placeholder ? ' story__media--placeholder' : '' );
 	?>
-	<a class="story__media" href="<?php echo esc_url( $ucf_story['permalink'] ); ?>" tabindex="-1" aria-hidden="true">
-		<?php echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() returns safe markup. ?>
+	<a class="<?php echo esc_attr( $ucf_story_media_classes ); ?>" href="<?php echo esc_url( $ucf_story['permalink'] ); ?>" tabindex="-1" aria-hidden="true">
+		<?php if ( ! $ucf_story_use_placeholder ) : ?>
+			<?php echo $ucf_story_image_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() returns safe markup. ?>
+		<?php endif; ?>
 	</a>
 	<?php
 };
