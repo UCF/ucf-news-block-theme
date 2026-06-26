@@ -85,7 +85,12 @@
 					"slug": "x-large",
 					"name": "Extra Large",
 					"size": "2rem"
-				}
+				},
+        {
+          "slug": "xx-large",
+          "name": "Double Extra Large",
+          "size": "4rem"
+        }
 			]
 		},
 		"typography": {

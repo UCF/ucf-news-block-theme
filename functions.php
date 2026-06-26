@@ -178,3 +178,41 @@ if ( ! function_exists( 'ucf_today_block_theme_enqueue_assets' ) ) {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ucf_today_block_theme_enqueue_assets' );
+
+if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
+	/**
+	 * Scopes the custom Query Loops in the category/tag archive templates to the
+	 * current term.
+	 *
+	 * The archive templates split posts into a lead story and a 9-up grid, which
+	 * requires custom queries (perPage/offset). A custom Query Loop does not
+	 * inherit the archive term, so without this filter it returns all posts.
+	 * We target only our loops (queryId 1 and 2) and inject the queried term so
+	 * the lead/grid split is preserved while staying scoped to the archive.
+	 *
+	 * @param array    $query Arguments for WP_Query, as built from the block.
+	 * @param WP_Block $block The block instance.
+	 * @return array Filtered query args.
+	 */
+	function ucf_today_scope_archive_query_loops( $query, $block ) {
+		$query_id = $block->context['queryId'] ?? ( $block->attributes['queryId'] ?? null );
+
+		if ( ! in_array( $query_id, array( 1, 2 ), true ) ) {
+			return $query;
+		}
+
+		$term = get_queried_object();
+		if ( ! $term instanceof WP_Term ) {
+			return $query;
+		}
+
+		if ( is_category() ) {
+			$query['cat'] = $term->term_id;
+		} elseif ( is_tag() ) {
+			$query['tag_id'] = $term->term_id;
+		}
+
+		return $query;
+	}
+}
+add_filter( 'query_loop_block_query_vars', 'ucf_today_scope_archive_query_loops', 10, 2 );
