@@ -270,6 +270,7 @@ function ucf_today_add_post_custom_fields() {
 			'add_term'          => 0,
 			'allow_null'        => 1,
 			'return_format'     => 'object',
+			'show_in_rest'      => 1,
 		);
 
 		// Adds Source tab

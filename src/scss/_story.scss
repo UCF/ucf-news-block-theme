@@ -14,6 +14,11 @@
     display: block;
   }
 
+  .story__media--placeholder {
+    aspect-ratio: 3 / 2;
+    background-color: var(--wp--preset--color--faded);
+  }
+
   // Title: the only linked element. Inherits heading fonts from theme.json.
   .story__title {
     margin: 0;
@@ -102,4 +107,38 @@
   border: 1px dashed var(--wp--preset--color--muted);
   text-align: center;
   color: var(--wp--preset--color--muted);
+}
+
+// Query Loop grids using the Story block (see story-query-grid pattern).
+.story-query,
+.related-stories-query {
+  .wp-block-post-template {
+    gap: var(--wp--preset--spacing--medium);
+
+    > .wp-block-post {
+      min-width: 0;
+      margin: 0;
+    }
+  }
+
+  .story {
+    min-width: 0;
+    height: 100%;
+  }
+
+  .story--stacked-title {
+    .story__media {
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+    }
+
+    .story__image {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story__title {
+      overflow-wrap: anywhere;
+    }
+  }
 }
