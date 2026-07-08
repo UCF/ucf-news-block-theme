@@ -12,8 +12,8 @@
  */
 ?>
 <!-- wp:group {"tagName":"section","metadata":{"categories":["featured"],"patternName":"ucf-news-block-theme/pegasus-promo","name":"Pegasus Magazine Promo"},"className":"pegasus-promo","layout":{"type":"constrained"}} -->
-<section class="wp-block-group pegasus-promo"><!-- wp:heading {"className":"pegasus-promo__heading u-uppercase u-tracking-wide","style":{"elements":{"link":{"color":{"text":"var:preset|color|muted"}}},"typography":{"fontSize":"15px"}},"textColor":"muted"} -->
-<h2 class="wp-block-heading pegasus-promo__heading u-uppercase u-tracking-wide has-muted-color has-text-color has-link-color" style="font-size:15px">Pegasus Magazine</h2>
+<!-- wp:heading {"className":"pegasus-promo__heading u-uppercase u-tracking-wide","style":{"elements":{"link":{"color":{"text":"var:preset|color|muted"}}}},"textColor":"muted","fontSize":"medium"} -->
+<h2 class="wp-block-heading pegasus-promo__heading u-uppercase u-tracking-wide has-muted-color has-text-color has-link-color has-medium-font-size">Pegasus Magazine</h2>
 <!-- /wp:heading -->
 
 <!-- wp:group {"className":"pegasus-promo__issue","layout":{"type":"default"}} -->
@@ -35,8 +35,8 @@
 <h3 class="wp-block-heading pegasus-promo__story-title has-secondary-color has-text-color has-link-color has-heading-5-font-size"><a href="https://www.ucf.edu/pegasus/prepared-to-protect/">Prepared to Protect</a></h3>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"className":"pegasus-promo__excerpt","style":{"typography":{"fontSize":"14px"}}} -->
-<p class="pegasus-promo__excerpt" style="font-size:14px">As relentless disasters test communities nationwide, UCF leads the way in shaping strategies and preparing a workforce to keep people safe and systems strong.</p>
+<!-- wp:paragraph {"className":"pegasus-promo__excerpt","fontSize":"small"} -->
+<p class="pegasus-promo__excerpt has-small-font-size">As relentless disasters test communities nationwide, UCF leads the way in shaping strategies and preparing a workforce to keep people safe and systems strong.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"right"}} -->
