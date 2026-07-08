@@ -12,7 +12,6 @@ include_once get_template_directory() . '/includes/highlights-functions.php';
 include_once get_template_directory() . '/includes/story-functions.php';
 include_once get_template_directory() . '/includes/related-stories-functions.php';
 include_once get_template_directory() . '/includes/resource-link-functions.php';
-include_once get_template_directory() . '/includes/weather-layouts.php';
 
 if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	/**
@@ -106,6 +105,47 @@ if ( ! function_exists( 'ucf_today_register_blocks' ) ) {
 	}
 }
 add_action( 'init', 'ucf_today_register_blocks' );
+
+
+if ( ! function_exists( 'ucf_today_attach_weather_block_style' ) ) {
+	/**
+	 * Attaches the UCF Weather plugin's stylesheet to the `ucf/weather` block.
+	 *
+	 * The plugin enqueues its stylesheet only on `wp_enqueue_scripts`, which does
+	 * not run for the block editor canvas. As a result the block's
+	 * ServerSideRender preview appears unstyled in the editor (oversized icon,
+	 * collapsed layout) while rendering correctly on the front end. Registering
+	 * the stylesheet as one of the block's `style_handles` lets core load it
+	 * wherever the block renders — the front end and the editor iframe alike —
+	 * so the preview matches the published output.
+	 *
+	 * @param array  $args Block type registration arguments.
+	 * @param string $name Block type name being registered.
+	 * @return array Possibly-modified arguments.
+	 */
+	function ucf_today_attach_weather_block_style( $args, $name ) {
+		if ( 'ucf/weather' !== $name || ! defined( 'UCF_WEATHER__STYLES_URL' ) ) {
+			return $args;
+		}
+
+		if ( ! wp_style_is( 'ucf-weather-css', 'registered' ) ) {
+			wp_register_style(
+				'ucf-weather-css',
+				UCF_WEATHER__STYLES_URL . '/ucf-weather.min.css',
+				array(),
+				null
+			);
+		}
+
+		$args['style_handles'] = array_merge(
+			isset( $args['style_handles'] ) ? (array) $args['style_handles'] : array(),
+			array( 'ucf-weather-css' )
+		);
+
+		return $args;
+	}
+}
+add_filter( 'register_block_type_args', 'ucf_today_attach_weather_block_style', 10, 2 );
 
 
 if ( ! function_exists( 'ucf_today_enable_resource_link_rest' ) ) {
