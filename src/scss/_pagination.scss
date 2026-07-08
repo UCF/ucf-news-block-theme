@@ -1,0 +1,85 @@
+// Athena pagination (style.min.css), mapped to core Query Loop markup.
+
+.wp-block-query-pagination {
+	margin-top: var(--wp--preset--spacing--x-large);
+	padding-bottom: var(--wp--preset--spacing--x-large);
+}
+
+// ul.page-numbers
+.wp-block-query-pagination-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 0;
+	list-style: none;
+	border-radius: 0;
+	justify-content: center;
+}
+
+// .page-link, ul.page-numbers a, .current, .dots
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next,
+.wp-block-query-pagination-numbers .page-numbers {
+	position: relative;
+	display: block;
+	padding: 0.5rem 0.75rem;
+	margin-left: -1px;
+	line-height: 1.25;
+	color: #0262b6;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	text-decoration: none;
+}
+
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next,
+.wp-block-query-pagination-numbers .page-numbers:first-child {
+	margin-left: 0;
+}
+
+// .page-link:hover, .page-link:focus, ul.page-numbers a:hover, etc.
+.wp-block-query-pagination-previous:hover,
+.wp-block-query-pagination-previous:focus,
+.wp-block-query-pagination-next:hover,
+.wp-block-query-pagination-next:focus,
+.wp-block-query-pagination-numbers .page-numbers:hover,
+.wp-block-query-pagination-numbers .page-numbers:focus {
+	color: #01396a;
+	text-decoration: none;
+	background-color: #eceeef;
+	border-color: #ddd;
+}
+
+// ul.page-numbers .current, .page-item.active .page-link
+.wp-block-query-pagination-numbers .page-numbers.current {
+	z-index: 2;
+	color: #000;
+	background-color: #fc0;
+	border-color: #fc0;
+}
+
+.wp-block-query-pagination-numbers .page-numbers.current:hover,
+.wp-block-query-pagination-numbers .page-numbers.current:focus {
+	color: #000;
+	background-color: #fc0;
+	border-color: #fc0;
+}
+
+// ul.page-numbers .dots
+.wp-block-query-pagination-numbers .page-numbers.dots {
+	color: #767676;
+	pointer-events: none;
+	cursor: not-allowed;
+	background-color: #fff;
+	border-color: #ddd;
+}
+
+// .page-item.disabled .page-link
+.wp-block-query-pagination-previous[aria-disabled='true'],
+.wp-block-query-pagination-next[aria-disabled='true'] {
+	color: #767676;
+	pointer-events: none;
+	cursor: not-allowed;
+	background-color: #fff;
+	border-color: #ddd;
+}
