@@ -225,21 +225,32 @@ if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
 	 * current term.
 	 *
 	 * The archive templates split posts into a lead story and a 9-up grid, which
-	 * requires custom queries (perPage/offset). A custom Query Loop does not
-	 * inherit the archive term, so without this filter it returns all posts.
-	 * We target only our loops by their custom `namespace` attribute (set in the
-	 * category/tag templates) — `queryId` is only unique per editing context and
-	 * could collide with other loops — and inject the queried term so the
-	 * lead/grid split is preserved while staying scoped to the archive.
+	 * requires custom queries (`inherit:false`, with perPage/offset). A custom
+	 * Query Loop does not inherit the archive term, so without this filter every
+	 * category and tag page returns the same unscoped list of recent posts.
 	 *
-	 * @param array    $query Arguments for WP_Query, as built from the block.
-	 * @param WP_Block $block The block instance.
+	 * We scope by the request context rather than by a per-block marker: the
+	 * `namespace` attribute set on those loops is not exposed to the block that
+	 * `query_loop_block_query_vars` receives (it is the inner post-template
+	 * block, and `namespace` is neither in core/query's `providesContext` nor
+	 * core/post-template's `usesContext`), so it cannot be read here. On a term
+	 * archive only the category/tag template renders, and its only `inherit:false`
+	 * post loops are the lead and grid — so scoping every standard-post loop on a
+	 * category/tag archive to the queried term is both correct and sufficient,
+	 * and it keeps the post-template, pagination, and no-results loops in sync.
+	 *
+	 * @param array $query Arguments for WP_Query, as built from the block.
 	 * @return array Filtered query args.
 	 */
-	function ucf_today_scope_archive_query_loops( $query, $block ) {
-		$namespace = $block->attributes['namespace'] ?? '';
+	function ucf_today_scope_archive_query_loops( $query ) {
+		// Only touch loops that pull standard posts (leave e.g. resource links alone).
+		$post_type = $query['post_type'] ?? 'post';
+		if ( 'post' !== $post_type ) {
+			return $query;
+		}
 
-		if ( ! in_array( $namespace, array( 'ucf-today/archive-lead', 'ucf-today/archive-grid' ), true ) ) {
+		// Only act on a category or tag archive.
+		if ( ! is_category() && ! is_tag() ) {
 			return $query;
 		}
 
@@ -257,4 +268,4 @@ if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
 		return $query;
 	}
 }
-add_filter( 'query_loop_block_query_vars', 'ucf_today_scope_archive_query_loops', 10, 2 );
+add_filter( 'query_loop_block_query_vars', 'ucf_today_scope_archive_query_loops', 10, 1 );
