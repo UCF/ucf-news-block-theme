@@ -1,0 +1,79 @@
+// Query Loop pagination — Athena-style layout using theme.json design tokens.
+
+:where(.wp-block-query-pagination) {
+	margin-block: var(--wp--preset--spacing--x-large);
+}
+
+.wp-block-query-pagination-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 0;
+	list-style: none;
+	border-radius: 0;
+	justify-content: center;
+}
+
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next,
+.wp-block-query-pagination-numbers .page-numbers {
+	position: relative;
+	display: block;
+	padding: var(--wp--preset--spacing--small) var(--wp--preset--spacing--medium);
+	margin-left: -1px;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.25;
+	color: var(--wp--style--elements--link--color--text);
+	background-color: var(--wp--preset--color--inverse);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 15%, transparent);
+	border-radius: 0;
+	text-decoration: none;
+}
+
+.wp-block-query-pagination-previous,
+.wp-block-query-pagination-next,
+.wp-block-query-pagination-numbers .page-numbers:first-child {
+	margin-left: 0;
+}
+
+.wp-block-query-pagination-previous:hover,
+.wp-block-query-pagination-previous:focus,
+.wp-block-query-pagination-next:hover,
+.wp-block-query-pagination-next:focus,
+.wp-block-query-pagination-numbers .page-numbers:hover,
+.wp-block-query-pagination-numbers .page-numbers:focus {
+	color: var(--wp--style--elements--link--hover--color--text);
+	text-decoration: none;
+	background-color: var(--wp--preset--color--faded);
+	border-color: color-mix(in srgb, var(--wp--preset--color--secondary) 15%, transparent);
+}
+
+.wp-block-query-pagination-numbers .page-numbers.current {
+	z-index: 2;
+	color: var(--wp--preset--color--secondary);
+	background-color: var(--wp--preset--color--primary);
+	border-color: var(--wp--preset--color--primary);
+}
+
+.wp-block-query-pagination-numbers .page-numbers.current:hover,
+.wp-block-query-pagination-numbers .page-numbers.current:focus {
+	color: var(--wp--preset--color--secondary);
+	background-color: var(--wp--preset--color--primary);
+	border-color: var(--wp--preset--color--primary);
+}
+
+.wp-block-query-pagination-numbers .page-numbers.dots {
+	color: var(--wp--preset--color--muted);
+	pointer-events: none;
+	cursor: not-allowed;
+	background-color: var(--wp--preset--color--inverse);
+	border-color: color-mix(in srgb, var(--wp--preset--color--secondary) 15%, transparent);
+}
+
+.wp-block-query-pagination-previous[aria-disabled='true'],
+.wp-block-query-pagination-next[aria-disabled='true'] {
+	color: var(--wp--preset--color--muted);
+	pointer-events: none;
+	cursor: not-allowed;
+	background-color: var(--wp--preset--color--inverse);
+	border-color: color-mix(in srgb, var(--wp--preset--color--secondary) 15%, transparent);
+}
