@@ -219,6 +219,35 @@ if ( ! function_exists( 'ucf_today_block_theme_enqueue_assets' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'ucf_today_block_theme_enqueue_assets' );
 
+if ( ! function_exists( 'ucf_today_enqueue_pullquote_format' ) ) {
+	/**
+	 * Registers the inline pullquote rich-text format for Paragraph blocks.
+	 */
+	function ucf_today_enqueue_pullquote_format() {
+		$relative_path = '/editor/formats/pullquote.js';
+		$full_path     = get_template_directory() . $relative_path;
+
+		if ( ! file_exists( $full_path ) ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'ucf-today-pullquote-format',
+			get_template_directory_uri() . $relative_path,
+			array(
+				'wp-rich-text',
+				'wp-block-editor',
+				'wp-element',
+				'wp-i18n',
+				'wp-data',
+			),
+			(string) filemtime( $full_path ),
+			true
+		);
+	}
+}
+add_action( 'enqueue_block_editor_assets', 'ucf_today_enqueue_pullquote_format' );
+
 if ( ! function_exists( 'ucf_today_scope_archive_query_loops' ) ) {
 	/**
 	 * Scopes the custom Query Loops in the category/tag archive templates to the

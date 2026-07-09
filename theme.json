@@ -403,6 +403,37 @@
 			"link": {
 				"color": {
 					"text": "#0262b6"
+				},
+				":hover": {
+					"color": {
+						"text": "#01396a"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/query-pagination": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)",
+					"lineHeight": "1.25"
+				},
+				"spacing": {
+					"margin": {
+						"top": "var(--wp--preset--spacing--x-large)",
+						"bottom": "var(--wp--preset--spacing--x-large)"
+					}
+				},
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var(--wp--style--elements--link--color--text)"
+						},
+						":hover": {
+							"color": {
+								"text": "var(--wp--style--elements--link--hover--color--text)"
+							}
+						}
+					}
 				}
 			}
 		}
