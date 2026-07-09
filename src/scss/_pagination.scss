@@ -1,8 +1,7 @@
 // Query Loop pagination — Athena-style layout using theme.json design tokens.
 
-.wp-block-query-pagination {
-	margin-top: var(--wp--preset--spacing--x-large);
-	padding-bottom: var(--wp--preset--spacing--x-large);
+:where(.wp-block-query-pagination) {
+	margin-block: var(--wp--preset--spacing--x-large);
 }
 
 .wp-block-query-pagination-numbers {
