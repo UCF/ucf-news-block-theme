@@ -7,3 +7,7 @@ node_modules/
 # Local environment files
 .env
 .env.*
+
+# Playwright test artifacts
+playwright-report/
+test-results/
