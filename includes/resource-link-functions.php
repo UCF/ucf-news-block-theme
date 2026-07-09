@@ -144,11 +144,12 @@ if ( ! function_exists( 'ucf_today_resource_plugins_installed' ) ) {
 		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		if (
-				(
-					is_plugin_active( 'UCF-Resource-Search-Plugin/ucf-resource-search.php' ) ||
-					is_plugin_active( 'UCF-Resource-Search/ucf-resource-search.php' ) // Legacy plugin slug
-				) &&
-				is_plugin_active( 'UCF-Source-Taxonomy-Plugin/ucf-sources-taxonomy.php' ) ) {
+			(
+				is_plugin_active( 'UCF-Resource-Search-Plugin/ucf-resource-search.php' ) ||
+				is_plugin_active( 'UCF-Resource-Search/ucf-resource-search.php' ) // Legacy plugin slug
+			) &&
+			is_plugin_active( 'UCF-Source-Taxonomy-Plugin/ucf-sources-taxonomy.php' )
+		) {
 			return true;
 		}
 
