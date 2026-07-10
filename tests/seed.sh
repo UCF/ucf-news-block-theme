@@ -25,7 +25,11 @@ cli theme activate "$THEME"
 cli rewrite structure '/%postname%/' --hard
 
 echo "Static front page (from the story-query-grid pattern)..."
-GRID_CONTENT=$(cli eval 'echo WP_Block_Patterns_Registry::get_instance()->get_registered("ucf-news-block-theme/story-query-grid")["content"];' || true)
+GRID_CONTENT=$(cli eval 'echo WP_Block_Patterns_Registry::get_instance()->get_registered("ucf-news-block-theme/story-query-grid")["content"];')
+if [[ -z "$GRID_CONTENT" ]]; then
+	echo "Could not load story-query-grid pattern content; is the theme active and the pattern registered?" >&2
+	exit 1
+fi
 HOME_ID=$(cli post create --post_type=page --post_status=publish \
 	--post_title='Home' --post_name='home' --post_content="$GRID_CONTENT" --porcelain)
 cli option update show_on_front 'page'
