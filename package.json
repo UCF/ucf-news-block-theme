@@ -5,16 +5,24 @@
 	"license": "GPL-3.0-or-later",
 	"author": "UCF Web Communications",
 	"private": true,
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"build": "sass src/scss/style.scss assets/css/main.css --style=compressed --no-source-map",
 		"watch": "sass --watch src/scss/style.scss assets/css/main.css --style=expanded",
 		"env:start": "wp-env start",
 		"env:stop": "wp-env stop",
 		"env:clean": "wp-env clean all",
+		"env:seed": "bash tests/seed.sh",
+		"test": "npm run test:a11y",
+		"test:a11y": "playwright test tests/a11y.spec.js",
 		"version:sync": "node scripts/sync-version.mjs",
 		"version": "npm run version:sync"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.10.0",
+		"@playwright/test": "^1.48.0",
 		"@wordpress/env": "^10.0.0",
 		"sass": "^1.100.0"
 	}

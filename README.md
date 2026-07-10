@@ -46,6 +46,8 @@ This initial scaffold intentionally does not define visual styles yet. It sets u
 │       └── style.scss
 ├── templates/
 │   └── index.html
+├── tests/
+│   └── README.md
 ├── theme.json
 └── style.css
 ```
@@ -66,7 +68,19 @@ This initial scaffold intentionally does not define visual styles yet. It sets u
 - `npm run env:start`: Start a local WordPress test environment via `wp-env`.
 - `npm run env:stop`: Stop the local `wp-env` environment.
 - `npm run env:clean`: Reset the `wp-env` environment.
+- `npm run env:seed`: Seed the `wp-env` environment with deterministic content for the test suite.
+- `npm run test` / `npm run test:a11y`: Run the automated accessibility test suite (see [Testing](#testing)).
 - `npm version patch|minor|major`: Bump version in `package.json`/`package-lock.json` and sync the `Version:` header in `style.css`.
+
+## Testing
+
+The theme includes an automated accessibility suite (Playwright + axe-core) that
+runs against a live WordPress instance across every core template and viewport,
+along with a CI workflow that enforces it on every pull request.
+
+See [`tests/README.md`](tests/README.md) for full setup and usage — how to run
+the suite against `wp-env` (the supported path) or another install, seeding
+requirements, and Docker/file-sharing gotchas.
 
 ## Versioning Process
 
