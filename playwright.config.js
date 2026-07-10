@@ -19,6 +19,7 @@ module.exports = defineConfig({
 	fullyParallel: true,
 	forbidOnly: !!process.env.CI,
 	reporter: process.env.CI ? [['github'], ['list'], ['html', { open: 'never' }]] : [['list']],
+	use: {
 		baseURL,
 		headless: true,
 		...(channel ? { channel } : {}),
