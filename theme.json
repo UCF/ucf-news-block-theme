@@ -270,29 +270,34 @@
 					]
 				},
 				{
-					"fontFamily": "'UCF Condensed Alt', sans-serif",
-					"name": "UCF Condensed Alt",
-					"slug": "ucf-condensed-alt",
+					"fontFamily": "'Oswald', 'Arial Narrow', sans-serif",
+					"name": "Oswald",
+					"slug": "oswald",
 					"fontFace": [
 						{
-							"fontFamily": "UCF Condensed Alt",
-							"fontWeight": "400",
+							"fontFamily": "Oswald",
+							"fontWeight": "200 700",
 							"fontStyle": "normal",
+							"fontStretch": "normal",
 							"src": [
-								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff2",
-								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff"
+								"file:./assets/fonts/oswald/oswald-variable-latin.woff2"
 							]
 						},
 						{
-							"fontFamily": "UCF Condensed Alt",
-							"fontWeight": "400",
-							"fontStyle": "italic",
+							"fontFamily": "Oswald",
+							"fontWeight": "200 700",
+							"fontStyle": "normal",
+							"fontStretch": "normal",
 							"src": [
-								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff2",
-								"file:./assets/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff"
+								"file:./assets/fonts/oswald/oswald-variable-latin-ext.woff2"
 							]
 						}
 					]
+				},
+				{
+					"fontFamily": "'Oswald', 'Arial Narrow', sans-serif",
+					"name": "UCF Condensed Alt (Oswald alias)",
+					"slug": "ucf-condensed-alt"
 				}
 			]
 		}
@@ -310,7 +315,7 @@
 		"elements": {
 			"h1": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(2rem, 4vw, 2.5rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
@@ -324,7 +329,7 @@
 			},
 			"h2": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(1.7rem, 3.5vw, 2rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
@@ -338,7 +343,7 @@
 			},
 			"h3": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(1.45rem, 3vw, 1.75rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
@@ -352,7 +357,7 @@
 			},
 			"h4": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(1.2rem, 2.5vw, 1.5rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
@@ -366,7 +371,7 @@
 			},
 			"h5": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(1rem, 2vw, 1.25rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
@@ -380,7 +385,7 @@
 			},
 			"h6": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+					"fontFamily": "var(--wp--preset--font-family--oswald)",
 					"fontSize": "clamp(0.75rem, 1.5vw, 1rem)",
 					"fontWeight": "600",
 					"lineHeight": "1.1"
