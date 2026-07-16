@@ -24,8 +24,11 @@
 }
 
 .resource-link {
+  // Title opts out of the Oswald heading default and uses the sans-serif face,
+  // matching the story block's titles.
   .resource-link__title {
     margin: 0;
+    font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
     line-height: 1.4;
     font-size: 1rem;
 
