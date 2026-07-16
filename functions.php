@@ -192,7 +192,10 @@ if ( ! function_exists( 'ucf_today_block_theme_setup' ) ) {
 	function ucf_today_block_theme_setup() {
 		add_theme_support( 'wp-block-styles' );
 		add_theme_support( 'editor-styles' );
-		add_editor_style( 'assets/css/main.css' );
+		// `main.css` mirrors the front end inside the canvas; `editor.css` is
+		// editor-only (never enqueued on the front end) and carries rules that
+		// should not ship to visitors.
+		add_editor_style( array( 'assets/css/main.css', 'assets/css/editor.css' ) );
 	}
 }
 add_action( 'after_setup_theme', 'ucf_today_block_theme_setup' );
