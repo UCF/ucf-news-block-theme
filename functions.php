@@ -6,6 +6,7 @@
  */
 
 include_once get_template_directory() . '/includes/post-functions.php';
+include_once get_template_directory() . '/includes/classic-content-functions.php';
 include_once get_template_directory() . '/includes/author-functions.php';
 include_once get_template_directory() . '/includes/header-media-functions.php';
 include_once get_template_directory() . '/includes/highlights-functions.php';
