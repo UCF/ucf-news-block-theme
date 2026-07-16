@@ -9,8 +9,8 @@
 		"node": ">=22"
 	},
 	"scripts": {
-		"build": "sass src/scss/style.scss assets/css/main.css --style=compressed --no-source-map",
-		"watch": "sass --watch src/scss/style.scss assets/css/main.css --style=expanded",
+		"build": "sass src/scss/style.scss:assets/css/main.css src/scss/editor.scss:assets/css/editor.css --style=compressed --no-source-map",
+		"watch": "sass --watch src/scss/style.scss:assets/css/main.css src/scss/editor.scss:assets/css/editor.css --style=expanded",
 		"env:start": "wp-env start",
 		"env:stop": "wp-env stop",
 		"env:clean": "wp-env clean all",

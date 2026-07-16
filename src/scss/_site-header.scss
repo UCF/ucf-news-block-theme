@@ -42,7 +42,7 @@
 		// Set both axes explicitly so the faded strip's size is driven by our
 		// tokens, not core's default has-background padding. Inline padding only
 		// matters once the viewport is narrower than the 1140px content width.
-		padding-block: var(--wp--preset--spacing--small);
+		padding-block: 0;
 		padding-inline: var(--wp--preset--spacing--medium);
 		border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
 		border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
@@ -55,4 +55,61 @@
 	font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
 	font-weight: 500;
 	letter-spacing: 0.05em;
+}
+
+// --- Mobile layout ---------------------------------------------------------
+// Below this width the two stacked header rows collapse onto a single line:
+// the logo on the left and the nav's "Sections" toggle on the right. The
+// tagline and weather slot are hidden to make room. (768px matches the mobile
+// breakpoint used elsewhere in the theme; the "Sections" toggle is already
+// shown at this width — see _main-nav.scss.)
+@media (max-width: 767.98px) {
+	.site-header {
+		// Lay the bar (logo) and nav (toggle) side by side instead of stacked.
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+		column-gap: var(--wp--preset--spacing--small);
+	}
+
+	.site-header__bar {
+		// Shrink to the logo; drop the tall block padding meant for a full row.
+		flex: 0 1 auto;
+		padding-block: var(--wp--preset--spacing--medium);
+	}
+
+	// Weather is not part of the compact mobile header.
+	// Qualified with `.site-header` so this rule's specificity (2 classes)
+	// beats core's global-styles `body .is-layout-flex{display:flex}` (1
+	// class + 1 element) — the weather group carries `is-layout-flex` from
+	// its block layout setting, so a bare `.site-header__weather` selector
+	// loses that specificity fight and never actually hides it.
+	.site-header .site-header__weather {
+		display: none;
+	}
+
+	.site-header__nav {
+		// No longer a full-bleed strip on mobile — it only carries the toggle,
+		// so drop the strip borders and faded fill and let it size to content.
+		flex: 0 0 auto;
+		width: auto;
+		margin-block-start: 0;
+		border: 0;
+		padding-inline: var(--wp--preset--spacing--medium);
+	}
+
+	// Core emits `.has-faded-background-color{background-color: ... !important}`
+	// for the block's backgroundColor support, so extra selector specificity
+	// alone can't win here — this override needs `!important` too.
+	.site-header .site-header__nav {
+		background-color: transparent !important;
+	}
+
+	// The tagline is hidden on the compact mobile header (a second copy
+	// lives inside the nav drawer — see `.main-nav__drawer-brand` in
+	// _main-nav.scss — so this must stay scoped to the top bar's copy).
+	.site-header__brand .site-tagline {
+		display: none;
+	}
 }

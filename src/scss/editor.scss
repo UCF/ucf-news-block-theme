@@ -1,0 +1,43 @@
+/*
+ * UCF Today Block Theme editor-only styles entrypoint.
+ *
+ * Compiled to `assets/css/editor.css` and loaded through `add_editor_style()`
+ * only — it is never enqueued on the front end, which is what makes these
+ * rules editor-only. (`assets/css/main.css` is loaded in *both* places, so
+ * editor-only rules cannot live there.)
+ *
+ * `add_editor_style()` feeds two different editors, and each treats this file
+ * differently:
+ *
+ *   - Block editor: WordPress prefixes every selector here with
+ *     `.editor-styles-wrapper` before injecting it into the canvas. Do NOT
+ *     scope rules to that class yourself, or it doubles up and never matches.
+ *   - Classic editor (the `classic-editor` plugin is active): the file is
+ *     handed to TinyMCE as `content_css` and applied as-authored, unprefixed,
+ *     inside its iframe.
+ *
+ * Selectors therefore need to work in both contexts — keep them scoped to
+ * content, not to editor chrome or block wrappers alone.
+ */
+
+// Stop stray clicks from navigating the editor away from the page being
+// edited, without making links un-editable.
+//
+// The risk is limited to anchors *outside* editable regions — chiefly the
+// ServerSideRender previews of our `ucf-today/*` blocks, whose real markup
+// (live links and all) is injected into the canvas. Those links are generated
+// from post data, so there is nothing to edit in them; swallowing the click
+// lets it fall through and select the block instead.
+//
+// Links inside `contenteditable` are deliberately left alone: browsers do not
+// follow a link on a plain click there — they place the caret — so authored
+// links in RichText and in Classic Editor content (TinyMCE's body is itself
+// `contenteditable`) are already safe, and stay clickable for editing via the
+// link toolbar.
+a {
+	pointer-events: none;
+}
+
+[contenteditable='true'] a {
+	pointer-events: auto;
+}
