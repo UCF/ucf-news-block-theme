@@ -19,9 +19,11 @@
     background-color: var(--wp--preset--color--faded);
   }
 
-  // Title: the only linked element. Inherits heading fonts from theme.json.
+  // Title: the only linked element. Story titles opt out of the Oswald
+  // heading default and use the sans-serif face instead.
   .story__title {
     margin: 0;
+    font-family: var(--wp--preset--font-family--ucf-sans-serif-alt);
     line-height: 1.4;
 
     a {
