@@ -1,13 +1,9 @@
-// Add a small horizontal inset on mobile so post content isn't flush
-// against the window edges. The constrained containers go full-width below
-// their contentSize, removing the centered gutter at narrow viewports.
-@media (max-width: 767.98px) {
-  main.wp-block-group,
-  .post-header__meta {
-    padding-left: var(--wp--preset--spacing--medium);
-    padding-right: var(--wp--preset--spacing--medium);
-  }
-}
+// The horizontal inset that keeps content off the window edges comes from the
+// root padding in theme.json (`styles.spacing.padding`), which
+// `useRootPaddingAwareAlignments` applies to every constrained container and
+// lets full-width blocks negate. Don't re-add it here: padding on `main` or on
+// another flow ancestor is outside that mechanism, so full-width blocks would
+// stay inset by it.
 
 // Add a little breathing room above the post header meta.
 .post-header__meta {

@@ -1,8 +1,7 @@
+// Width comes from the block's own constrained layout (contentSize 950px), so
+// the section itself stays full-width and keeps its root padding. Capping the
+// section here instead would subtract that padding from the 950px.
 .related-stories {
-  max-width: 950px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
   margin-bottom: 3rem;
 
   hr {

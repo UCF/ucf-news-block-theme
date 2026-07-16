@@ -302,11 +302,16 @@
 					"slug": "ucf-condensed-alt"
 				}
 			]
-		}
+		},
+		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
 		"spacing": {
-			"blockGap": "1rem"
+			"blockGap": "1rem",
+			"padding": {
+				"left": "var(--wp--preset--spacing--medium)",
+				"right": "var(--wp--preset--spacing--medium)"
+			}
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
