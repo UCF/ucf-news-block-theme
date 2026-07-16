@@ -32,11 +32,23 @@ if ( ! function_exists( 'ucf_today_open_post_content_scope' ) ) {
 	/**
 	 * Opens the Post Content scope before the block renders.
 	 *
+	 * Only the block actually rendering opens a scope. Another filter returning
+	 * a non-null value short-circuits `render_block()`, and the block's render
+	 * never runs — so `render_block_core/post-content` never fires and the scope
+	 * would never close, leaving every later nameless block on the page treated
+	 * as post content. Hence the guard, and hence running last: at an earlier
+	 * priority this would open the scope before a later filter had the chance to
+	 * short-circuit, and the guard would never see it.
+	 *
 	 * @param string|null $pre_render   Pre-rendered content, or null to continue.
 	 * @param array       $parsed_block Block about to render.
 	 * @return string|null The unchanged $pre_render value.
 	 */
 	function ucf_today_open_post_content_scope( $pre_render, $parsed_block ) {
+		if ( null !== $pre_render ) {
+			return $pre_render;
+		}
+
 		if ( 'core/post-content' === ( $parsed_block['blockName'] ?? '' ) ) {
 			ucf_today_post_content_depth( 1 );
 		}
@@ -44,7 +56,8 @@ if ( ! function_exists( 'ucf_today_open_post_content_scope' ) ) {
 		return $pre_render;
 	}
 }
-add_filter( 'pre_render_block', 'ucf_today_open_post_content_scope', 10, 2 );
+
+add_filter( 'pre_render_block', 'ucf_today_open_post_content_scope', PHP_INT_MAX, 2 );
 
 if ( ! function_exists( 'ucf_today_close_post_content_scope' ) ) {
 	/**
