@@ -5,6 +5,24 @@
 // another flow ancestor is outside that mechanism, so full-width blocks would
 // stay inset by it.
 
+// Classic-editor content carries no block delimiters, so its raw markup lands
+// straight inside the full-width Post Content block. ucf_today_wrap_classic_content()
+// wraps it in this container to restore the contentSize-wide containing block
+// that the legacy float styles below were authored against. A plain container,
+// not a layout one: core's constrained-layout rules force `margin: auto !important`
+// on a layout container's direct children and would flatten the negative
+// outdents those floats rely on.
+.entry-content__classic {
+  max-width: var(--wp--style--global--content-size);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Block content sits directly inside Post Content; classic content sits one
+// level down, inside the wrapper above. The legacy drop-cap and float styles
+// have to match the immediate children of whichever one is in play.
+$content-root: ':is(.wp-block-post-content, .entry-content__classic)';
+
 // Add a little breathing room above the post header meta.
 .post-header__meta {
   margin-top: var(--wp--preset--spacing--large);
@@ -107,7 +125,7 @@
 
 // Drop cap styles for the first letter of the first paragraph in post content.
 // Based on styles from the UCF News website.
-.wp-block-post-content > p:first-of-type::first-letter {
+#{$content-root} > p:first-of-type::first-letter {
   float: left;
   font-size: 3rem;
   font-weight: 700;
@@ -178,7 +196,11 @@ blockquote:not(.wp-block-pullquote blockquote) {
   border: 0;
   padding: 0;
   min-width: 270px;
-  width: 75%;
+  // Three quarters of the text column. Block content sits directly in the
+  // full-width Post Content block, so a bare percentage would resolve against
+  // the viewport; the cap keeps quotes column-relative in block and classic
+  // content alike, while the percentage still takes over below contentSize.
+  width: min(75%, calc(0.75 * var(--wp--style--global--content-size)));
   margin: 2.5rem auto;
 
   blockquote p,
@@ -228,16 +250,16 @@ blockquote:not(.wp-block-pullquote blockquote) {
 }
 
 // Float wrap for aligned block quotes and legacy markup in the main post flow.
-.wp-block-post-content > .wp-block-pullquote.alignleft,
-.wp-block-post-content > blockquote.wp-block-quote.alignleft,
-.wp-block-post-content > blockquote.alignleft:not(.wp-block-pullquote blockquote),
-.wp-block-post-content > blockquote:not(.wp-block-quote):not(.wp-block-pullquote blockquote) {
+#{$content-root} > .wp-block-pullquote.alignleft,
+#{$content-root} > blockquote.wp-block-quote.alignleft,
+#{$content-root} > blockquote.alignleft:not(.wp-block-pullquote blockquote),
+#{$content-root} > blockquote:not(.wp-block-quote):not(.wp-block-pullquote blockquote) {
   @include pullquote-float-left;
 }
 
-.wp-block-post-content > .wp-block-pullquote.alignright,
-.wp-block-post-content > blockquote.wp-block-quote.alignright,
-.wp-block-post-content > blockquote.alignright:not(.wp-block-pullquote blockquote) {
+#{$content-root} > .wp-block-pullquote.alignright,
+#{$content-root} > blockquote.wp-block-quote.alignright,
+#{$content-root} > blockquote.alignright:not(.wp-block-pullquote blockquote) {
   @include pullquote-float-right;
 }
 
