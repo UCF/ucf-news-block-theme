@@ -71,6 +71,7 @@
 		align-items: center;
 		justify-content: space-between;
 		column-gap: var(--wp--preset--spacing--small);
+		border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--secondary) 12%, transparent);
 	}
 
 	.site-header__bar {

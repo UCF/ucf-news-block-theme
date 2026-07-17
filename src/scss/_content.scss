@@ -34,8 +34,14 @@ $content-root: ':is(.wp-block-post-content, .entry-content__classic, .wp-block-f
 
 // Add a little breathing room above the post header meta.
 .post-header__meta {
-  margin-top: var(--wp--preset--spacing--large);
+  margin-top: var(--wp--preset--spacing--xx-large);
 }
+@media (max-width: 767.98px) {
+	.post-header__meta {
+  	margin-top: var(--wp--preset--spacing--large);
+	}
+}
+
 
 // The category is output as a plain paragraph (see the ucf-today/post-category
 // block) so it carries no default paragraph spacing.

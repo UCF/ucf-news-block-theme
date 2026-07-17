@@ -1,0 +1,19 @@
+// Reset the default block spacing to use the theme's spacing scale.
+main {
+	margin-block-start: var(--wp--preset--spacing--xx-large);
+}
+@media (max-width: 767.98px) {
+	main {
+		margin-block-start: var(--wp--preset--spacing--large);
+	}
+}
+
+// Reset the default block spacing to use the theme's spacing scale.
+.wp-site-blocks {
+	margin-block-end: var(--wp--preset--spacing--xx-large);
+}
+@media (max-width: 767.98px) {
+	.wp-site-blocks {
+	margin-block-end: var(--wp--preset--spacing--large);
+	}
+}
