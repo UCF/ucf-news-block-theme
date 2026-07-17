@@ -491,6 +491,18 @@ figure.wp-caption.alignright {
   }
 }
 
+// A full-aligned image must span the container edge-to-edge regardless of the
+// source's intrinsic size. The 1067px cap above otherwise wins whenever core
+// does not emit a per-instance `<layout-container> .alignfull{max-width:none}`
+// rule to beat it — which happens on post-content that uses the generic
+// constrained-layout class rather than a unique `wp-container-*` one (e.g. the
+// single-post template). Lift the cap ourselves so full width never depends on
+// that. `.wp-block-image.alignfull` (2 classes) beats the cap (1 class), and
+// core's `.has-global-padding > .alignfull` breakout margins still apply.
+.wp-block-image.alignfull {
+  max-width: none;
+}
+
 .wp-caption {
   max-width: 100% !important;
   height: auto !important;
