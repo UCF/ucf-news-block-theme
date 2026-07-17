@@ -5,22 +5,14 @@
 
 	<!-- wp:query-title {"type":"archive","showPrefix":false} /-->
 
-	<!-- wp:columns {"className":"tag-layout","style":{"spacing":{"blockGap":"var:preset|spacing|xx-large"}}} -->
-	<div class="wp-block-columns tag-layout">
+	<!-- wp:columns {"className":"archive-layout","style":{"spacing":{"blockGap":"var:preset|spacing|xx-large"}}} -->
+	<div class="wp-block-columns archive-layout">
 
-		<!-- wp:column {"width":"66.66%","className":"tag-layout__main","style":{"spacing":{"blockGap":"var:preset|spacing|x-large"}},"layout":{"type":"default"}} -->
-		<div class="wp-block-column tag-layout__main" style="flex-basis:66.66%">
+		<!-- wp:column {"width":"66.66%","className":"archive-layout__main","style":{"spacing":{"blockGap":"var:preset|spacing|x-large"}},"layout":{"type":"default"}} -->
+		<div class="wp-block-column archive-layout__main" style="flex-basis:66.66%">
 
-			<!-- wp:query {"queryId":1,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false},"className":"tag-lead"} -->
-			<div class="wp-block-query tag-lead">
-				<!-- wp:post-template -->
-					<!-- wp:ucf-today/story {"variant":"stacked"} /-->
-				<!-- /wp:post-template -->
-			</div>
-			<!-- /wp:query -->
-
-			<!-- wp:query {"queryId":2,"query":{"perPage":9,"pages":0,"offset":1,"postType":"post","order":"desc","orderBy":"date","inherit":false},"className":"tag-grid"} -->
-			<div class="wp-block-query tag-grid">
+			<!-- wp:query {"queryId":1,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"layout":{"type":"default"},"className":"archive-stories"} -->
+			<div class="wp-block-query archive-stories">
 				<!-- wp:post-template {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|x-large","left":"var:preset|spacing|large"}}},"layout":{"type":"grid","columnCount":3}} -->
 					<!-- wp:ucf-today/story {"variant":"stacked"} /-->
 				<!-- /wp:post-template -->
@@ -42,8 +34,8 @@
 		</div>
 		<!-- /wp:column -->
 
-		<!-- wp:column {"width":"33.33%","className":"tag-layout__sidebar"} -->
-		<div class="wp-block-column tag-layout__sidebar" style="flex-basis:33.33%">
+		<!-- wp:column {"width":"33.33%","className":"archive-layout__sidebar"} -->
+		<div class="wp-block-column archive-layout__sidebar" style="flex-basis:33.33%">
 
 			<!-- wp:ucf-today/resource-links {"showDescription":false} /-->
 

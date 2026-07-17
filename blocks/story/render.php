@@ -51,10 +51,28 @@ if ( ! $ucf_story['post_id'] ) {
 	return;
 }
 
-$ucf_story_variants = array( 'feature', 'stacked', 'stacked-title', 'inline' );
+// `lead` is not author-selectable; it is derived below for the first story of
+// an archive loop. It is otherwise a full-width variant of `stacked`.
+$ucf_story_variants = array( 'feature', 'lead', 'stacked', 'stacked-title', 'inline' );
 $ucf_story_variant  = $attributes['variant'] ?? 'stacked';
 if ( ! in_array( $ucf_story_variant, $ucf_story_variants, true ) ) {
 	$ucf_story_variant = 'stacked';
+}
+
+// Promote the first story of an archive Query Loop to the full-width `lead`
+// layout. The archive template uses a single `inherit:true` loop, so core's
+// post-template iterates the global $wp_query directly (see
+// wp-includes/blocks/post-template.php); `current_post === 0` is therefore the
+// first item, and it resets per paginated page. `in_the_loop()` confirms we are
+// iterating that global query rather than an independent WP_Query loop (e.g.
+// related stories), whose position would not be reflected here.
+if (
+	'stacked' === $ucf_story_variant
+	&& is_archive()
+	&& in_the_loop()
+	&& 0 === (int) ( $GLOBALS['wp_query']->current_post ?? -1 )
+) {
+	$ucf_story_variant = 'lead';
 }
 
 // Per-variant image size and responsive `sizes` hint. We reuse WordPress core
@@ -64,6 +82,7 @@ if ( ! in_array( $ucf_story_variant, $ucf_story_variants, true ) ) {
 // out at 3:2: large = 1024x683, medium_large = 768x512, medium = 300x200.
 $ucf_story_image_map = array(
 	'feature'       => array( 'size' => 'large', 'sizes' => '(min-width: 768px) 50vw, 100vw' ),
+	'lead'          => array( 'size' => 'large', 'sizes' => '(min-width: 768px) 66vw, 100vw' ),
 	'stacked'       => array( 'size' => 'medium_large', 'sizes' => '(min-width: 768px) 33vw, 100vw' ),
 	'stacked-title' => array( 'size' => 'medium', 'sizes' => '(min-width: 768px) 25vw, 50vw' ),
 	'inline'        => array( 'size' => 'medium', 'sizes' => '(min-width: 768px) 200px, 33vw' ),
@@ -122,7 +141,7 @@ $ucf_story_render_image = static function () use ( $ucf_story, $ucf_story_image_
 			<a href="<?php echo esc_url( $ucf_story['permalink'] ); ?>"><?php echo esc_html( $ucf_story['title'] ); ?></a>
 		</<?php echo $ucf_story_heading; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted heading tag. ?>>
 
-		<?php if ( in_array( $ucf_story_variant, array( 'feature', 'stacked' ), true ) && $ucf_story['excerpt'] ) : ?>
+		<?php if ( in_array( $ucf_story_variant, array( 'feature', 'lead', 'stacked' ), true ) && $ucf_story['excerpt'] ) : ?>
 			<p class="story__excerpt"><?php echo esc_html( $ucf_story['excerpt'] ); ?></p>
 		<?php endif; ?>
 
