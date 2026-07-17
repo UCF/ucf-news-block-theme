@@ -31,8 +31,7 @@
  *   editable image placeholder in it and an unfilled media area renders blank.
  *   Columns let the media area be a real `wp:image` placeholder like the rest.
  * - The jumbotron is a full-bleed `core/group` on the `secondary` (black) token
- *   with `inverse` text and a `primary` (gold) button — a bold statement break
- *   between sections, using palette tokens rather than one-off colors.
+ *   with `inverse` text.
  * - The photo grid is `core/gallery` (the native grid block); images are left
  *   unset so each cell shows a media placeholder.
  */
